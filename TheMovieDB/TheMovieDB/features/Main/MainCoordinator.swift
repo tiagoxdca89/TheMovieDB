@@ -8,38 +8,26 @@
 
 import UIKit
 
-class MainCoordinator: NSObject, Coordinator {
-    
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-        super.init()
-    }
-    
-    // MARK: - Public methods
-    
-    func start() {
-        guard let controller = MainBuilder.buildViewController() else { return }
-        controller.coordinator = self
-        controller.modalPresentationStyle = .fullScreen
-        navigationController.delegate = self
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.viewControllers = [controller]
-    }
-    
-    func showTabBar() {
-        let child = TabBarCoordinator(navigationController: navigationController)
-        childCoordinators.append(child)
-        child.start()
-    }
-    
+protocol MainFlow: class {
+    func coordinateToTabBar()
 }
 
-extension MainCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        debugPrint("")
+class MainCoordinator: Coordinator, MainFlow {
+
+    let navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
+    func start() {
+        guard let mainController = MainBuilder.buildViewController() else { return }
+        mainController.coordinator = self
+        navigationController.pushViewController(mainController, animated: true)
+    }
+
+    func coordinateToTabBar() {
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        coordinate(to: tabBarCoordinator)
     }
 }

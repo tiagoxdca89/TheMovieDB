@@ -7,19 +7,27 @@
 //
 
 import UIKit
-import Foundation
 
 class MainViewController: UIViewController {
     
-    weak var coordinator: MainCoordinator?
+    var coordinator: MainFlow?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.layoutIfNeeded()
         showLoading(show: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.showLoading(show: false)
-            self.coordinator?.showTabBar()
+            self.coordinator?.coordinateToTabBar()
         }
     }
-
+    
+    @IBAction func showTabBar(_ sender: Any) {
+        print("Clicou aqui")
+        
+    }
 }

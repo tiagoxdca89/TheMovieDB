@@ -15,6 +15,7 @@ struct SearchBuilder {
     static func buildViewController() -> SearchViewController? {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Search, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as? SearchViewController
+        controller?.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         return controller
     }
 }

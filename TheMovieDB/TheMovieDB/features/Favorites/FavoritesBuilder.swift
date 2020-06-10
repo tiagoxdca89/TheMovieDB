@@ -15,6 +15,7 @@ struct FavoritesBuilder {
     static func buildViewController() -> FavoritesViewController? {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Favorites, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as? FavoritesViewController
+        controller?.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
         return controller
     }
 }

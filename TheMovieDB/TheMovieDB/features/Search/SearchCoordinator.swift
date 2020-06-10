@@ -10,22 +10,15 @@ import UIKit
 
 class SearchCoordinator: Coordinator {
     
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    
-    var navigationController: UINavigationController = UINavigationController()
-//    private var parentNavigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
+   weak var navigationController: UINavigationController?
+   
+   init(navigationController: UINavigationController) {
+       self.navigationController = navigationController
+   }
+   
     func start() {
-        guard let controller = SearchBuilder.buildViewController() else { return }
-        controller.coordinator = self
-        navigationController.viewControllers = [controller]
-        navigationController.modalPresentationStyle = .fullScreen
-        let icon = UIImage(named: Constants.TabBarIcons.Search)
-        navigationController.tabBarItem = UITabBarItem(title: Constants.TabBarNames.Search, image: icon, tag: 1)
+        guard let searchViewController = SearchBuilder.buildViewController() else { return }
+        searchViewController.coordinator = self
+        navigationController?.pushViewController(searchViewController, animated: false)
     }
 }

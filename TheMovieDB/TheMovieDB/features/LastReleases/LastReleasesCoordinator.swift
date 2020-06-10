@@ -10,23 +10,16 @@ import UIKit
 
 class LastReleasesCoordinator: Coordinator {
     
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    
-    var navigationController: UINavigationController = UINavigationController()
-//    private var parentNavigationController: UINavigationController
+    weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
-        guard let controller = LastReleasesBuilder.buildViewController() else { return }
-        controller.coordinator = self
-        navigationController.viewControllers = [controller]
-        navigationController.modalPresentationStyle = .fullScreen
-        let icon = UIImage(named: Constants.TabBarIcons.LastReleases)
-        navigationController.tabBarItem = UITabBarItem(title: Constants.TabBarNames.LastReleases, image: icon, tag: 0)
-    }
+     func start() {
+         guard let searchViewController = LastReleasesBuilder.buildViewController() else { return }
+         searchViewController.coordinator = self
+         navigationController?.pushViewController(searchViewController, animated: false)
+     }
 }
 

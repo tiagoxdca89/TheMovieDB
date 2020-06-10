@@ -14,5 +14,11 @@ class TabBarController: UITabBarController {
     
     // MARK: - Public properties
     
-    weak var coordinator: TabBarCoordinator?
+    var coordinator: TabBarCoordinator?
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        debugPrint("Did load TabBarController")
+    }
 }

@@ -10,22 +10,16 @@ import UIKit
 
 class FavoritesCoordinator: Coordinator {
     
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    
-    var navigationController: UINavigationController = UINavigationController()
-//    private var parentNavigationController: UINavigationController
+    weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
-        guard let controller = FavoritesBuilder.buildViewController() else { return }
-        controller.coordinator = self
-        navigationController.viewControllers = [controller]
-        navigationController.modalPresentationStyle = .fullScreen
-        let icon = UIImage(named: Constants.TabBarIcons.Favorites)
-        navigationController.tabBarItem = UITabBarItem(title: Constants.TabBarNames.Favorites, image: icon, tag: 2)
-    }
+     func start() {
+         guard let favoritesController = FavoritesBuilder.buildViewController() else { return }
+        
+         favoritesController.coordinator = self
+         navigationController?.pushViewController(favoritesController, animated: false)
+     }
 }

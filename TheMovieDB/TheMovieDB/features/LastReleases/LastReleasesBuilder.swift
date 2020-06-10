@@ -15,6 +15,7 @@ struct LastReleasesBuilder {
     static func buildViewController() -> LastReleasesViewController? {
         let storyboard = UIStoryboard(name: Constants.Storyboard.LastReleases, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as? LastReleasesViewController
+        controller?.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
         return controller
     }
 }

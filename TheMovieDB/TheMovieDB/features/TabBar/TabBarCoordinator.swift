@@ -12,60 +12,42 @@ import UIKit
 
 class TabBarCoordinator: NSObject, Coordinator {
     
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    var navigationController: UINavigationController = UINavigationController()
-    private var parentNavigationController: UINavigationController
-    
-    // MARK: - Initialization
+    let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
-        self.parentNavigationController = navigationController
+        self.navigationController = navigationController
     }
     
     func start() {
-        let result = TabBarBuilder.buildViewControllerAndCoordinators()
-        let tabBar = result.tabBar
-        let coordinators = result.coordinators
+        let tabBarController = TabBarController()
+        tabBarController.coordinator = self
         
-        tabBar.coordinator = self
-        tabBar.delegate = self
-        tabBar.modalPresentationStyle = .fullScreen
-        tabBar.tabBar.tintColor = .blue
-        tabBar.tabBar.unselectedItemTintColor = .black
+        let releasesNavigationController = UINavigationController()
+        releasesNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
+        let releasesCoordinator = LastReleasesCoordinator(navigationController: releasesNavigationController)
         
-        navigationController.viewControllers = [tabBar]
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.modalPresentationStyle = .fullScreen
+        let searchNavigationController = UINavigationController()
+        searchNavigationController.tabBarItem = UITabBarItem(
+            tabBarSystemItem: .search, tag: 1)
+        let searchCoordinator = SearchCoordinator(navigationController: searchNavigationController)
         
-        DispatchQueue.main.async {
-            self.parentNavigationController.present(self.navigationController, animated: false, completion: nil)
-
-            for coordinator in coordinators {
-                coordinator.parentCoordinator = self
-                self.childCoordinators.append(coordinator)
-                coordinator.start()
-            }
-
-            if let selectedController = tabBar.viewControllers?[tabBar.selectedIndex] {
-                self.reorderCoordinators(viewController: selectedController)
-            }
-        }
-    }
-}
-
-extension TabBarCoordinator: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        reorderCoordinators(viewController: viewController)
-        return true
+        let favoritesNavigationController = UINavigationController()
+        favoritesNavigationController.tabBarItem = UITabBarItem(
+            tabBarSystemItem: .favorites, tag: 2)
+        let favoritesCoordinator = FavoritesCoordinator(navigationController: favoritesNavigationController)
+        
+        tabBarController.viewControllers = [releasesNavigationController,
+                                            searchNavigationController,
+                                            favoritesNavigationController]
+        
+        tabBarController.modalPresentationStyle = .fullScreen
+        navigationController.present(tabBarController, animated: true, completion: nil)
+        
+        coordinate(to: releasesCoordinator)
+        coordinate(to: searchCoordinator)
+        coordinate(to: favoritesCoordinator)
     }
     
-    func reorderCoordinators(viewController: UIViewController) {
-      let coordinators = childCoordinators.filter{ $0.navigationController === viewController }
-      if let coordinator = coordinators.first {
-        childCoordinators = childCoordinators.filter{ !($0.navigationController === viewController) }
-        childCoordinators.append(coordinator)
-      }
-    }
 }
+
+

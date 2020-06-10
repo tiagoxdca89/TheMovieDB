@@ -12,21 +12,15 @@ import UIKit
 
 class DetailsCoordinator: Coordinator {
     
-    var childCoordinators = [Coordinator]()
-    weak var parentCoordinator: Coordinator?
-    
-    var navigationController: UINavigationController = UINavigationController()
-//    private var parentNavigationController: UINavigationController
+    weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
-        guard let controller = DetailsBuilder.buildViewController() else { return }
-        controller.coordinator = self
-        DispatchQueue.main.async {
-            self.navigationController.pushViewController(controller, animated: true)
-        }
-    }
+     func start() {
+         guard let searchViewController = DetailsBuilder.buildViewController() else { return }
+         searchViewController.coordinator = self
+         navigationController?.pushViewController(searchViewController, animated: false)
+     }
 }
