@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var coordinator: MainCoordinator?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coordinator?.start()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .purple
+//        window?.backgroundColor = .purple
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         

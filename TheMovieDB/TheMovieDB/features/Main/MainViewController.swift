@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         showLoading(show: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.showLoading(show: false)
+            self.coordinator?.showTabBar()
         }
     }
 

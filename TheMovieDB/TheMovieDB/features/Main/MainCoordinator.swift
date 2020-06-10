@@ -11,7 +11,7 @@ import UIKit
 class MainCoordinator: NSObject, Coordinator {
     
     var childCoordinators = [Coordinator]()
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -30,6 +30,11 @@ class MainCoordinator: NSObject, Coordinator {
         navigationController.viewControllers = [controller]
     }
     
+    func showTabBar() {
+        let child = TabBarCoordinator(navigationController: navigationController)
+        childCoordinators.append(child)
+        child.start()
+    }
     
 }
 
