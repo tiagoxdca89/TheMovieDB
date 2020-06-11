@@ -31,8 +31,8 @@ class RequestService: RequestServiceProtocol {
                 let request = self.sessionManager.request(urlConvertible)
                     .validate()
                     .responseJSON { response in
-                        guard let _ = response.data else {
-                            observer(.error(RemoteFetchError.parsingResponse))
+                        guard let data = response.data else {
+                            observer(.error(RemoteFetchError.noData))
                             return
                         }
                         switch response.result {
@@ -40,12 +40,8 @@ class RequestService: RequestServiceProtocol {
                             debugPrint(response.request)
                             debugPrint(response.request?.allHTTPHeaderFields ?? "")
                             debugPrint(response)
-                            guard let data = response.data else {
-                                observer(.error(RemoteFetchError.parsingResponse))
-                                return
-                            }
                             guard let value = try? JSONDecoder().decode(T.self, from: data) else {
-                                observer(.error(RemoteFetchError.decodingResponse))
+                                observer(.error(RemoteFetchError.decoding))
                                 return
                             }
                             observer(.success(value))
@@ -57,11 +53,9 @@ class RequestService: RequestServiceProtocol {
                     request.cancel()
                 }
             } else {
-                observer(.error(RemoteFetchError.networkNotAvailable))
+                observer(.error(RemoteFetchError.noInternet))
                 return Disposables.create()
             }
         }
     }
-    
-    
 }

@@ -10,12 +10,27 @@ import UIKit
 
 struct LastReleasesBuilder {
     
+    private static let requestService = RequestService.shared
+    
     // MARK: Public methods
     
     static func buildViewController() -> LastReleasesViewController? {
         let storyboard = UIStoryboard(name: Constants.Storyboard.LastReleases, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as? LastReleasesViewController
+        controller?.viewModel = buildViewModel()
         controller?.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
         return controller
+    }
+    
+    
+    private static func buildViewModel() -> LastReleasesViewModelProtocol {
+        let useCase = buildLastReleasesUseCase()
+        return LastReleasesViewModel(useCase: useCase)
+    }
+    
+    private static func buildLastReleasesUseCase() -> LastReleasesUseCaseProtocol {
+        let remoteDataSource = LastReleasesRemoteDataSource(service: requestService)
+        let useCase = LastReleasesUseCase(remoteDataSource: remoteDataSource)
+        return useCase
     }
 }

@@ -7,18 +7,51 @@
 //
 
 import UIKit
+import RxSwift
 
 class LastReleasesViewController: UIViewController {
+    
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     
     var viewModel: LastReleasesViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
     
-    weak var coordinator: LastReleasesCoordinator?
+    var coordinator: LastReleasesCoordinator?
+    let bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.viewDidLoad()
+        setupBinding()
+    }
+    
+    private func setupBinding() {
+        viewModel?.dataSource.asObservable()
+            .bind(to: self.collectionView.rx.items(cellIdentifier: MovieCell.reuseIdentifier, cellType: MovieCell.self)) { row, movie, cell in
+            cell.load(movie: movie)
+        }.disposed(by: bag)
+        
+        collectionView.rx.setDelegate(self).disposed(by: bag)
+        
+        collectionView
+            .rx
+            .itemSelected
+            .subscribe(onNext: { indexPath in
+                print("\(indexPath.row)")
+                self.coordinator?.coordinateToDetail()
+            }).disposed(by: bag)
         
     }
+}
 
+extension LastReleasesViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height / 1.5
+        return CGSize(width: width, height: height)
+    }
 }

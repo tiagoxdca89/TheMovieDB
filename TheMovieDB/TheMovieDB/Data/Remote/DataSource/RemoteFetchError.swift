@@ -11,12 +11,14 @@ import Foundation
 enum GenericError: Error {
     case capturingSelf(entity: AnyObject)
 }
-enum RemoteFetchError: Error, Equatable {
-    case networkNotAvailable
-    case parsingResponse
-    case decodingResponse
-    case notAuthorized
-    case resourceNotFound
-    case badRequestGeneric
-    case unknown
+enum RemoteFetchError: Error {
+    
+    case url
+    case taskError(error: Error)
+    case noResponse
+    case noData
+    case decoding
+    case responseStatusCode(code: Int)
+    case invalidJSON
+    case noInternet
 }

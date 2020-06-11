@@ -8,7 +8,11 @@
 
 import UIKit
 
-class LastReleasesCoordinator: Coordinator {
+protocol LastReleasesFlow: class {
+    func coordinateToDetail()
+}
+
+class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
     
     weak var navigationController: UINavigationController?
     
@@ -17,9 +21,16 @@ class LastReleasesCoordinator: Coordinator {
     }
     
      func start() {
-         guard let searchViewController = LastReleasesBuilder.buildViewController() else { return }
-         searchViewController.coordinator = self
-         navigationController?.pushViewController(searchViewController, animated: false)
+         guard let lastReleasesController = LastReleasesBuilder.buildViewController()
+            else { return }
+         lastReleasesController.coordinator = self
+         navigationController?.pushViewController(lastReleasesController, animated: false)
      }
+    
+    func coordinateToDetail() {
+        guard let navigationController = navigationController else { return }
+        let detailCoordinator = DetailsCoordinator(navigationController: navigationController)
+        coordinate(to: detailCoordinator)
+    }
 }
 

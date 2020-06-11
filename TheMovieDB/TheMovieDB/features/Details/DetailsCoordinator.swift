@@ -19,8 +19,9 @@ class DetailsCoordinator: Coordinator {
     }
     
      func start() {
-         guard let searchViewController = DetailsBuilder.buildViewController() else { return }
-         searchViewController.coordinator = self
-         navigationController?.pushViewController(searchViewController, animated: false)
+         guard let detailViewController = DetailsBuilder.buildViewController() else { return }
+         detailViewController.coordinator = self
+        navigationController?.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(detailViewController, animated: true, completion: nil)
      }
 }
