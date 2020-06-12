@@ -24,5 +24,4 @@ class LastReleasesUseCase: LastReleasesUseCaseProtocol {
     func getLastReleases() -> Single<[Movie]> {
         return remoteDataSource.getMovie().map { $0.results }
     }
-    
 }

@@ -8,7 +8,11 @@
 
 import UIKit
 
-class SearchCoordinator: Coordinator {
+protocol SearchFlow: class {
+    func coordinateToDetail(movie: Movie)
+}
+
+class SearchCoordinator: Coordinator, SearchFlow {
     
    weak var navigationController: UINavigationController?
    
@@ -20,5 +24,11 @@ class SearchCoordinator: Coordinator {
         guard let searchViewController = SearchBuilder.buildViewController() else { return }
         searchViewController.coordinator = self
         navigationController?.pushViewController(searchViewController, animated: false)
+    }
+    
+    func coordinateToDetail(movie: Movie) {
+        guard let navigationController = navigationController else { return }
+        let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
+        coordinate(to: detailCoordinator)
     }
 }

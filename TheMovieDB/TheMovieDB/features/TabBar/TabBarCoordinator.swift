@@ -23,10 +23,20 @@ class TabBarCoordinator: NSObject, Coordinator {
         tabBarController.coordinator = self
         
         let releasesNavigationController = UINavigationController()
+        releasesNavigationController.navigationBar.barTintColor = UIColor.black
+        releasesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        releasesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        releasesNavigationController.navigationBar.prefersLargeTitles = true
+        
         releasesNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
         let releasesCoordinator = LastReleasesCoordinator(navigationController: releasesNavigationController)
         
         let searchNavigationController = UINavigationController()
+        searchNavigationController.navigationBar.barTintColor = UIColor.black
+        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        searchNavigationController.navigationBar.prefersLargeTitles = true
+        
         searchNavigationController.tabBarItem = UITabBarItem(
             tabBarSystemItem: .search, tag: 1)
         let searchCoordinator = SearchCoordinator(navigationController: searchNavigationController)

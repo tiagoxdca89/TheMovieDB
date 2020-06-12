@@ -71,32 +71,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B6BDD17B-0E91-44BF-8D46-1F090632A8CE"
+            uuid = "9282E183-871D-4FAF-89A3-97ACFDA0372E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TheMovieDB/Data/Remote/API/RequestService.swift"
+            filePath = "TheMovieDB/features/Details/DetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "request(_:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "setupUI(movie:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3ADA64AA-1095-497C-ADDE-E47A1D30D702"
+            uuid = "A01D7080-9500-485D-987D-610F4F53F7F9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TheMovieDB/Data/Remote/API/RequestService.swift"
+            filePath = "TheMovieDB/features/Search/SearchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "request(_:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "setupBinding()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "354213B2-ADA8-4AEC-A412-C5437B8911F1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TheMovieDB/features/Search/SearchViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "setupBinding()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

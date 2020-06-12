@@ -24,6 +24,7 @@ class LastReleasesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "LAST RELEASES"
         viewModel?.viewDidLoad()
         setupBinding()
     }

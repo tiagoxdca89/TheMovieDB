@@ -16,6 +16,7 @@ struct Movie: Codable  {
     
     var id: Int?
     var title: String?
+    var original_title: String?
     var homepage: String?
     var poster_path: String?
     var backdrop_path: String?
@@ -26,14 +27,20 @@ struct Movie: Codable  {
     var vote_count: Int?
     var video: Bool?
     var runtime: Int?
+    var genres: [Genre]?
     
     func getPosterEndPoint() -> String {
         guard let poster = poster_path else { return "" }
         return "https://image.tmdb.org/t/p/w500\(poster)"
     }
     
-    func getBackDropURL() -> String? {
+    func getBackDropURL() -> String {
         guard let backdrop = backdrop_path else { return "" }
         return "https://image.tmdb.org/t/p/w500\(backdrop)"
     }
+}
+
+struct Genre: Codable {
+    var id: Int?
+    var name: String?
 }
