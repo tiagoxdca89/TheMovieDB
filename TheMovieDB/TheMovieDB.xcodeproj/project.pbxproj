@@ -369,10 +369,10 @@
 		0F5999BC2490CFAD001A4027 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				0F5999C32490D204001A4027 /* Details.storyboard */,
 				0F5999BD2490CFEC001A4027 /* DetailsViewController.swift */,
 				0F5999BF2490D004001A4027 /* DetailsCoordinator.swift */,
 				0F5999C12490D10A001A4027 /* DetailsBuilder.swift */,
-				0F5999C32490D204001A4027 /* Details.storyboard */,
 				0F5999C72490D3B7001A4027 /* DetailsViewModel.swift */,
 			);
 			path = Details;
