@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import CoreData
-import Kingfisher
 
 protocol FavoritesRepositoryProtocol {
     func save(movie: Movie) -> Single<Void>
