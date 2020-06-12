@@ -37,9 +37,6 @@ class RequestService: RequestServiceProtocol {
                         }
                         switch response.result {
                         case .success:
-                            debugPrint(response.request)
-                            debugPrint(response.request?.allHTTPHeaderFields ?? "")
-                            debugPrint(response)
                             guard let value = try? JSONDecoder().decode(T.self, from: data) else {
                                 observer(.error(RemoteFetchError.decoding))
                                 return

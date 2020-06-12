@@ -10,9 +10,9 @@ import Foundation
 
 enum GenericError: Error {
     case capturingSelf(entity: AnyObject)
+    case invalidType
 }
 enum RemoteFetchError: Error {
-    
     case url
     case taskError(error: Error)
     case noResponse

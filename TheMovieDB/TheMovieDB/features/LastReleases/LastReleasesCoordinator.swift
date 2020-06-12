@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LastReleasesFlow: class {
-    func coordinateToDetail()
+    func coordinateToDetail(movie: Movie)
 }
 
 class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
@@ -27,9 +27,9 @@ class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
          navigationController?.pushViewController(lastReleasesController, animated: false)
      }
     
-    func coordinateToDetail() {
+    func coordinateToDetail(movie: Movie) {
         guard let navigationController = navigationController else { return }
-        let detailCoordinator = DetailsCoordinator(navigationController: navigationController)
+        let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
         coordinate(to: detailCoordinator)
     }
 }

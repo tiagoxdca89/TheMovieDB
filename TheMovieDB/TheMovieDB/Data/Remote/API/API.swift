@@ -27,7 +27,7 @@ struct API {
   }
     
     struct MovieDetailsByID {
-        static let path = "/movie/%@"
+        static let path = "/movie/%d"
         struct ParamKeys {
           static let apiKey = "api_key"
           static let language = "language"

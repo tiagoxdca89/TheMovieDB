@@ -13,14 +13,16 @@ import UIKit
 class DetailsCoordinator: Coordinator {
     
     weak var navigationController: UINavigationController?
+    let movie: Movie
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, movie: Movie) {
         self.navigationController = navigationController
+        self.movie = movie
     }
     
      func start() {
-         guard let detailViewController = DetailsBuilder.buildViewController() else { return }
-         detailViewController.coordinator = self
+        guard let detailViewController = DetailsBuilder.buildViewController(movie: movie) else { return }
+        detailViewController.coordinator = self
         navigationController?.modalPresentationStyle = .overCurrentContext
         navigationController?.present(detailViewController, animated: true, completion: nil)
      }

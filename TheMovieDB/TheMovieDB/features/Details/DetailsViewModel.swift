@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: Protocol
 
-protocol DetailsViewModelProtocol: class {
+protocol DetailsViewModelProtocol: BaseViewModelProtocol {
     
 }
 
@@ -18,8 +18,31 @@ protocol DetailsViewModelProtocol: class {
 
 class DetailsViewModel: BaseViewModel {
     
-    override init() {}
+    let movie: Movie
+    let useCase: DetailUseCaseProtocol
+    
+    init(movie: Movie, useCase: DetailUseCaseProtocol) {
+        self.movie = movie
+        self.useCase = useCase
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        useCase.getDetailMovie(movie: movie)
+            .subscribe(onSuccess: { (movie) in
+                print("===\(movie.title) = \(movie.poster_path)")
+            }, onError: { (error: Error) in
+                print("[ERROR] = \(error.localizedDescription)")
+            })
+            .disposed(by: bag)
+    }
     
 }
+
+extension DetailsViewModel: DetailsViewModelProtocol {}
 
 

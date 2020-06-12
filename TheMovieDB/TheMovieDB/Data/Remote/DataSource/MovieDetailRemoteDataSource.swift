@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol MovieRemoteDataSourceProtocol {
-    func getMovieDetail(_ id: Int) -> Single<MovieResponse>
+    func getMovieDetail(_ id: Int) -> Single<Movie>
     func getMovieDetail(_ title: String) -> Single<MovieResponse>
 }
 
@@ -22,7 +22,7 @@ class MovieRemoteDataSource: MovieRemoteDataSourceProtocol {
         self.requestService = service
     }
     
-    func getMovieDetail(_ id: Int) -> Single<MovieResponse> {
+    func getMovieDetail(_ id: Int) -> Single<Movie> {
         return requestService.request(MovieDetailsRequest.getMovieDetails(id: id))
     }
     

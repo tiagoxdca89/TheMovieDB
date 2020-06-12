@@ -29,7 +29,9 @@ class LastReleasesViewController: UIViewController {
     }
     
     private func setupBinding() {
-        viewModel?.dataSource.asObservable()
+        guard let viewModel = viewModel else { return }
+        
+        viewModel.dataSource.asObservable()
             .bind(to: self.collectionView.rx.items(cellIdentifier: MovieCell.reuseIdentifier, cellType: MovieCell.self)) { row, movie, cell in
             cell.load(movie: movie)
         }.disposed(by: bag)
@@ -39,10 +41,14 @@ class LastReleasesViewController: UIViewController {
         collectionView
             .rx
             .itemSelected
-            .subscribe(onNext: { indexPath in
-                print("\(indexPath.row)")
-                self.coordinator?.coordinateToDetail()
-            }).disposed(by: bag)
+            .bind(to: viewModel.selectedIndexPath)
+            .disposed(by: bag)
+        
+        viewModel.selectedMovie.asObservable()
+            .subscribe(onNext: { [weak self] (movie) in
+                self?.coordinator?.coordinateToDetail(movie: movie)
+            })
+            .disposed(by: bag)
         
     }
 }
