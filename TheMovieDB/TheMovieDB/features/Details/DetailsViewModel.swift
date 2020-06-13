@@ -40,7 +40,6 @@ class DetailsViewModel: BaseViewModel {
         return _movieDetail.asDriver(onErrorJustReturn: Movie())
     }
     
-    
     private let _movieDetail = PublishSubject<Movie>()
     
     init(movie: Movie, useCase: DetailUseCaseProtocol) {
@@ -66,5 +65,3 @@ class DetailsViewModel: BaseViewModel {
 }
 
 extension DetailsViewModel: DetailsViewModelProtocol {}
-
-
