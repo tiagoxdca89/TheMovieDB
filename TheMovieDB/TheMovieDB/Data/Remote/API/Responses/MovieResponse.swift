@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tiago Xavier da Cunha Almeida. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct MovieResponse: Codable {
     let results: [Movie]
@@ -27,7 +27,9 @@ struct Movie: Codable  {
     var vote_count: Int?
     var video: Bool?
     var runtime: Int?
-    var genres: [Genre]?
+    var poster: Data?
+    var backdrop: Data?
+    var genres: [GenreModel]?
     
     func getPosterEndPoint() -> String {
         guard let poster = poster_path else { return "" }
@@ -40,7 +42,7 @@ struct Movie: Codable  {
     }
 }
 
-struct Genre: Codable {
+struct GenreModel: Codable {
     var id: Int?
     var name: String?
 }

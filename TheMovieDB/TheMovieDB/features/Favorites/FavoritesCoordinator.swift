@@ -8,7 +8,11 @@
 
 import UIKit
 
-class FavoritesCoordinator: Coordinator {
+protocol FavoriteFlow: class {
+    func coordinateToDetail(movie: Movie)
+}
+
+class FavoritesCoordinator: Coordinator, FavoriteFlow {
     
     weak var navigationController: UINavigationController?
     
@@ -22,4 +26,10 @@ class FavoritesCoordinator: Coordinator {
          favoritesController.coordinator = self
          navigationController?.pushViewController(favoritesController, animated: false)
      }
+    
+    func coordinateToDetail(movie: Movie) {
+        guard let navigationController = navigationController else { return }
+        let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
+        coordinate(to: detailCoordinator)
+    }
 }

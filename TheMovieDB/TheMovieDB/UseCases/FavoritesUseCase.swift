@@ -11,6 +11,8 @@ import RxSwift
 
 protocol FavoritesUseCaseProtocol {
     func getFavorites() -> Single<[FavoriteMovie]>
+    func save(movie: Movie) -> Single<Void>
+    func deleteMovieAt(indexPath: IndexPath) -> Single<Void>
 }
 
 class FavoritesUseCase: FavoritesUseCaseProtocol {
@@ -23,5 +25,13 @@ class FavoritesUseCase: FavoritesUseCaseProtocol {
     
     func getFavorites() -> Single<[FavoriteMovie]> {
         return self.repository.getFavorites()
+    }
+    
+    func save(movie: Movie) -> Single<Void> {
+        return repository.save(movie: movie)
+    }
+    
+    func deleteMovieAt(indexPath: IndexPath) -> Single<Void> {
+        return repository.deleteMovie(at: indexPath)
     }
 }

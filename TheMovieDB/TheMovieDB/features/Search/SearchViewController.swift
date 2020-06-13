@@ -12,6 +12,7 @@ import RxSwift
 class SearchViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
+    
     var viewModel: SearchViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }

@@ -14,9 +14,7 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var backdrop_img: UIImageView!
     @IBOutlet weak var btnPlay: UIButton!
-    
     @IBOutlet weak var lbl_title: UILabel!
-    
     @IBOutlet weak var lbl_subtitle: UILabel!
     @IBOutlet weak var lbl_year: UILabel!
     @IBOutlet weak var lbl_duration: UILabel!
@@ -50,13 +48,21 @@ class DetailsViewController: UIViewController {
                 }, onError: { (error: Error) in
                     debugPrint("[ERROR] = \(error.localizedDescription)")
             }).disposed(by: bag)
+        
+        btn_addFavorites.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                let posterData = self?.poster.image?.pngData()
+                let backDropData = self?.backdrop_img.image?.pngData()
+                viewModel.saveToFavorites(poster: posterData, backDrop: backDropData)
+                self?.btn_addFavorites.isEnabled = false
+            })
+            .disposed(by: bag)
     }
 }
 
 extension DetailsViewController {
     
     fileprivate func setupUI(movie: Movie) {
-        
         let posterURL = movie.getPosterEndPoint()
         let backdrop = movie.getBackDropURL()
         setupImage(url: posterURL, imageView: poster)
@@ -66,12 +72,11 @@ extension DetailsViewController {
         lbl_year.text = movie.release_date
         lbl_duration.text = "\(movie.runtime ?? 0 / 60)"
         overview.text = movie.overview
-        votes.text = "\(movie.vote_average)"
+        votes.text = "\(movie.vote_average ?? 0.0)"
         categories.text = getGenders(genders: movie.genres)
-        
     }
     
-    fileprivate func getGenders(genders: [Genre]?) -> String {
+    fileprivate func getGenders(genders: [GenreModel]?) -> String {
         guard let _genders = genders else { return "" }
         var genders_String = ""
         _genders.forEach {

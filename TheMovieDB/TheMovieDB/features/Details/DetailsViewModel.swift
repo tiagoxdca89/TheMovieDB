@@ -14,27 +14,16 @@ import RxCocoa
 
 protocol DetailsViewModelProtocol: BaseViewModelProtocol {
     var movieDetail: Driver<Movie> { get }
+    func saveToFavorites(poster: Data?, backDrop: Data?)
 }
-
-var id: Int?
-var title: String?
-var homepage: String?
-var poster_path: String?
-var backdrop_path: String?
-var overview: String?
-var release_date: String?
-var popularity: Double?
-var vote_average: Double?
-var vote_count: Int?
-var video: Bool?
-var runtime: Int?
 
 // MARK: - Class
 
 class DetailsViewModel: BaseViewModel {
     
-    let movie: Movie
-    let useCase: DetailUseCaseProtocol
+    var movie: Movie
+    let detailUseCase: DetailUseCaseProtocol
+    let favoriteUseCase: FavoritesUseCaseProtocol
     
     var movieDetail: Driver<Movie> {
         return _movieDetail.asDriver(onErrorJustReturn: Movie())
@@ -42,9 +31,10 @@ class DetailsViewModel: BaseViewModel {
     
     private let _movieDetail = PublishSubject<Movie>()
     
-    init(movie: Movie, useCase: DetailUseCaseProtocol) {
+    init(movie: Movie, useCase: DetailUseCaseProtocol, favoriteUseCase: FavoritesUseCaseProtocol) {
         self.movie = movie
-        self.useCase = useCase
+        self.detailUseCase = useCase
+        self.favoriteUseCase = favoriteUseCase
     }
     
     override func viewDidLoad() {
@@ -52,8 +42,19 @@ class DetailsViewModel: BaseViewModel {
         setupBindings()
     }
     
+    func saveToFavorites(poster: Data?, backDrop: Data?) {
+        movie.poster = poster
+        movie.backdrop = backDrop
+        favoriteUseCase.save(movie: movie).asObservable().subscribe(onNext: { _ in
+            debugPrint("[SAVED]")
+        }, onError: { (error: Error) in
+            debugPrint("[ERROR] => \(error)")
+        })
+            .disposed(by: bag)
+    }
+    
     private func setupBindings() {
-        useCase.getDetailMovie(movie: movie)
+        detailUseCase.getDetailMovie(movie: movie)
             .subscribe(onSuccess: { [weak self] (movie) in
                 self?._movieDetail.onNext(movie)
             }, onError: { (error: Error) in

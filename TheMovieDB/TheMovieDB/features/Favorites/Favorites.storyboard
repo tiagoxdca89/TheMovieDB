@@ -14,13 +14,87 @@
                     <view key="view" contentMode="scaleToFill" id="haa-KF-nvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WIj-Yl-PIB">
+                                <rect key="frame" x="0.0" y="229" width="414" height="448"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vVg-YV-31H">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" rowHeight="150" id="GcV-1C-vv1" customClass="FavoriteCell" customModule="TheMovieDB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GcV-1C-vv1" id="efB-rK-9dr">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EqF-50-YBG">
+                                                    <rect key="frame" x="20" y="11" width="140" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="B7u-47-0dl"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARTEMIS FOWL" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX4-le-SUb">
+                                                    <rect key="frame" x="168" y="11" width="226" height="85.5"/>
+                                                    <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year 2018" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-se-7J4">
+                                                    <rect key="frame" x="168" y="96.5" width="226" height="42.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6Ue-se-7J4" secondAttribute="trailing" id="0u7-vK-nN5"/>
+                                                <constraint firstItem="EqF-50-YBG" firstAttribute="leading" secondItem="efB-rK-9dr" secondAttribute="leadingMargin" id="1ZR-4q-Scq"/>
+                                                <constraint firstItem="nX4-le-SUb" firstAttribute="leading" secondItem="EqF-50-YBG" secondAttribute="trailing" constant="8" id="26V-di-6IP"/>
+                                                <constraint firstItem="6Ue-se-7J4" firstAttribute="height" secondItem="EqF-50-YBG" secondAttribute="height" multiplier="1/3" id="2Ux-Kz-Luf"/>
+                                                <constraint firstItem="nX4-le-SUb" firstAttribute="trailing" secondItem="efB-rK-9dr" secondAttribute="trailingMargin" id="BwT-DT-gkO"/>
+                                                <constraint firstItem="nX4-le-SUb" firstAttribute="height" secondItem="EqF-50-YBG" secondAttribute="height" multiplier="2/3" id="GwH-O4-QA4"/>
+                                                <constraint firstItem="6Ue-se-7J4" firstAttribute="leading" secondItem="EqF-50-YBG" secondAttribute="trailing" constant="8" id="NTU-fm-ZbY"/>
+                                                <constraint firstItem="EqF-50-YBG" firstAttribute="centerY" secondItem="efB-rK-9dr" secondAttribute="centerY" id="h6x-bg-Eht"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6Ue-se-7J4" secondAttribute="bottom" id="r9n-2g-PLT"/>
+                                                <constraint firstItem="nX4-le-SUb" firstAttribute="top" secondItem="efB-rK-9dr" secondAttribute="topMargin" id="sDG-at-B7V"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" red="0.8902680838" green="0.2070635129" blue="0.17371135160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="EqF-50-YBG" firstAttribute="height" secondItem="GcV-1C-vv1" secondAttribute="height" multiplier="0.853333" id="hV3-OG-7jG"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="posterImageView" destination="EqF-50-YBG" id="Evw-ua-bkM"/>
+                                            <outlet property="title" destination="nX4-le-SUb" id="3fI-vE-jPI"/>
+                                            <outlet property="year" destination="6Ue-se-7J4" id="YwB-MW-B0E"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4Fr-lL-XII" firstAttribute="trailing" secondItem="vVg-YV-31H" secondAttribute="trailing" id="6FM-x7-hKh"/>
+                            <constraint firstItem="vVg-YV-31H" firstAttribute="bottom" secondItem="4Fr-lL-XII" secondAttribute="bottom" id="Au5-hS-GSL"/>
+                            <constraint firstItem="WIj-Yl-PIB" firstAttribute="width" secondItem="haa-KF-nvc" secondAttribute="width" id="T2J-F3-epe"/>
+                            <constraint firstItem="vVg-YV-31H" firstAttribute="top" secondItem="4Fr-lL-XII" secondAttribute="top" id="TGU-0P-ytp"/>
+                            <constraint firstItem="WIj-Yl-PIB" firstAttribute="centerX" secondItem="4Fr-lL-XII" secondAttribute="centerX" id="VH3-O9-fxi"/>
+                            <constraint firstItem="WIj-Yl-PIB" firstAttribute="height" secondItem="haa-KF-nvc" secondAttribute="height" multiplier="1/2" id="gcz-Rt-fFM"/>
+                            <constraint firstItem="WIj-Yl-PIB" firstAttribute="centerY" secondItem="4Fr-lL-XII" secondAttribute="centerY" id="rhd-hm-tbH"/>
+                            <constraint firstItem="vVg-YV-31H" firstAttribute="leading" secondItem="4Fr-lL-XII" secondAttribute="leading" id="uOP-qR-pSs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4Fr-lL-XII"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="vVg-YV-31H" id="Qo8-Za-0ME"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1B-Az-Q9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-314" y="194"/>
+            <point key="canvasLocation" x="-314.49275362318843" y="193.52678571428569"/>
         </scene>
     </scenes>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 struct DetailsBuilder {
     
@@ -23,11 +24,24 @@ struct DetailsBuilder {
     
     private static func buildViewModel(movie: Movie) -> DetailsViewModelProtocol {
         let useCase = buildDetailUseCase()
-        return DetailsViewModel(movie: movie, useCase: useCase)
+        let favoritesUseCase = buildFavoritesUseCase()
+        return DetailsViewModel(movie: movie, useCase: useCase, favoriteUseCase: favoritesUseCase)
     }
     
     private static func buildDetailUseCase() -> DetailUseCaseProtocol {
         let dataSource = MovieRemoteDataSource(service: requestService)
         return DetailUseCase(dataSource: dataSource)
     }
+    
+    private static func buildFavoritesUseCase() -> FavoritesUseCaseProtocol {
+        let managerCD = appDelegate.coreDataManager
+        let fetchedController = NSFetchedResultsController<FavoriteMovie>()
+        let repository = FavoritesRepository(coreDataManager: managerCD, fetchedResultsController: fetchedController)
+        return FavoritesUseCase(repository: repository)
+    }
+    
+    private static var appDelegate: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
 }
