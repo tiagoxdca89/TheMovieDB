@@ -11,19 +11,38 @@ import RxSwift
 import CoreData
 
 protocol FavoritesRepositoryProtocol {
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     func save(movie: Movie) -> Single<Void>
-    func deleteMovie(at index: IndexPath) -> Single<Void>
+    func deleteMovie(at indexPath: IndexPath) -> Single<Void>
     func getFavorites() -> Single<[FavoriteMovie]>
 }
 
 class FavoritesRepository: FavoritesRepositoryProtocol {
     
     let coreDataManager: CoreDataManager
-    let fetchedResultsController: NSFetchedResultsController<FavoriteMovie>
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie>
     
     init(coreDataManager: CoreDataManager, fetchedResultsController: NSFetchedResultsController<FavoriteMovie>) {
         self.coreDataManager = coreDataManager
         self.fetchedResultsController = fetchedResultsController
+        setupFetchedResultsController()
+    }
+    
+    private func setupFetchedResultsController() {
+        let fetchRequest:NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+//        let predicate = NSPredicate(format: "notebook == %@", notebook)
+//        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataManager.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+//        fetchedResultsController.delegate = self
+
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
     }
     
     func save(movie: Movie) -> Single<Void> {
@@ -51,15 +70,12 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
         }
     }
     
-    func deleteMovie(at index: IndexPath) -> Single<Void> {
-        let fetchRequest: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        guard let movies = try? coreDataManager.viewContext.fetch(fetchRequest) else { return .just(()) }
+    func deleteMovie(at indexPath: IndexPath) -> Single<Void> {
         
         return Single<Void>.create { [weak self] (observer) -> Disposable in
             guard let self = self else { return Disposables.create() }
-            self.coreDataManager.viewContext.delete(movies[index.row])
+            let movieToDelete = self.fetchedResultsController.object(at: indexPath)
+            self.coreDataManager.viewContext.delete(movieToDelete)
             try? self.coreDataManager.viewContext.save()
             observer(.success(()))
             return Disposables.create()

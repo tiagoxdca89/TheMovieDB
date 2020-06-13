@@ -7,15 +7,21 @@
 //
 
 import Foundation
+import CoreData
 import RxSwift
 
 protocol FavoritesUseCaseProtocol {
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     func getFavorites() -> Single<[FavoriteMovie]>
     func save(movie: Movie) -> Single<Void>
     func deleteMovieAt(indexPath: IndexPath) -> Single<Void>
 }
 
 class FavoritesUseCase: FavoritesUseCaseProtocol {
+    
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> {
+        return repository.fetchedResultsController
+    }
     
     private let repository: FavoritesRepositoryProtocol
     

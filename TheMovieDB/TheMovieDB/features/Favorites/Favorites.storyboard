@@ -73,6 +73,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="PiT-FM-XXn" id="qRr-Ui-HlV"/>
+                                    <outlet property="delegate" destination="PiT-FM-XXn" id="V3P-MA-jrj"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -12,16 +12,22 @@ import RxCocoa
 import CoreData
 
 protocol FavoritesViewModelProtocol: BaseViewModelProtocol {
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     var dataSource: Driver <[FavoriteMovie]> { get }
     var selectedMovie: Driver<FavoriteMovie> { get }
     var indexToDelete: Driver<IndexPath> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
     var deleteOnIndexPath: PublishSubject<IndexPath> { get set }
-    func convertMovie(favorite: FavoriteMovie) -> Movie
+//    func convertMovie(favorite: FavoriteMovie) -> Movie
+    func deleteMovie(at indexpath: IndexPath)
     func viewWillAppear()
 }
 
 class FavoritesViewModel: BaseViewModel {
+    
+    var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> {
+        return favoritesUseCase.fetchedResultsController
+    }
     
     var dataSource: Driver<[FavoriteMovie]> {
         return _dataSource.asDriver(onErrorJustReturn: [])
@@ -79,11 +85,12 @@ class FavoritesViewModel: BaseViewModel {
         
     }
     
-    private func deleteMovie(at indexpath: IndexPath) {
+    func deleteMovie(at indexpath: IndexPath) {
         favoritesUseCase.deleteMovieAt(indexPath: indexpath)
             .asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.getFavorites()
+                print("Movie deleted")
+//                self?.getFavorites()
 //                guard let self = self else { return }
 //                var movies = (try? self._dataSource.value()) ?? []
 //                movies.remove(at: indexpath.row)
@@ -104,9 +111,9 @@ class FavoritesViewModel: BaseViewModel {
             .disposed(by: bag)
     }
     
-    func convertMovie(favorite: FavoriteMovie) -> Movie {
-        return Movie(id: Int(favorite.id), title: favorite.title, original_title: favorite.original_title, homepage: favorite.homepage, poster_path: favorite.poster_path, backdrop_path: favorite.backdrop_path, overview: favorite.overview, release_date: favorite.release_date, popularity: favorite.popularity, vote_average: favorite.vote_average, vote_count: Int(favorite.vote_count), video: false, runtime: Int(favorite.runtime), genres: convertGenders(genders: favorite.genres?.allObjects as? [Genre] ))
-    }
+//    func convertMovie(favorite: FavoriteMovie) -> Movie {
+//        return Movie(id: Int(favorite.id), title: favorite.title, original_title: favorite.original_title, homepage: favorite.homepage, poster_path: favorite.poster_path, backdrop_path: favorite.backdrop_path, overview: favorite.overview, release_date: favorite.release_date, popularity: favorite.popularity, vote_average: favorite.vote_average, vote_count: Int(favorite.vote_count), video: false, runtime: Int(favorite.runtime), genres: convertGenders(genders: favorite.genres?.allObjects as? [Genre] ))
+//    }
     
     private func convertGenders(genders: [Genre]?) -> [GenreModel] {
         guard let genders = genders else { return [] }

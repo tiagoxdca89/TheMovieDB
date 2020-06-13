@@ -18,7 +18,8 @@ class FavoriteCell: UITableViewCell {
     
     static let reuseIdentifier = "FavoriteCell"
     
-    func setupCell(favorite: FavoriteMovie) {
+    func setupCell(favorite: FavoriteMovie?) {
+        guard let favorite = favorite else { return }
         title.text = favorite.title
         year.text = favorite.release_date
         if let imageData = favorite.poster {
