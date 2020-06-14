@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Kingfisher
+import SafariServices
 
 class DetailsViewController: UIViewController {
     
@@ -48,6 +49,22 @@ class DetailsViewController: UIViewController {
                 }, onError: { (error: Error) in
                     debugPrint("[ERROR] = \(error.localizedDescription)")
             }).disposed(by: bag)
+        
+        viewModel.trailerURLString.asObservable()
+            .subscribe(onNext: { [weak self] urlString in
+                if let url = URL(string: urlString) {
+                    let safariVC = SFSafariViewController(url: url)
+                    self?.present(safariVC, animated: true)
+//                    UIApplication.shared.open(url)
+                }
+            })
+            .disposed(by: bag)
+        
+        btnPlay.rx.tap.asObservable()
+            .subscribe(onNext: { _ in
+                viewModel.getTrailer()
+            })
+            .disposed(by: bag)
         
         btn_addFavorites.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in

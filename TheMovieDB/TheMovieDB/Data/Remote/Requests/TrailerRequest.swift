@@ -10,18 +10,18 @@ import Foundation
 
 enum TrailerRequest: URLRequestBuilder {
     
-    case getTrailer
+    case getTrailer(movieID: Int)
     
     var path: String {
         switch self {
-        case .getTrailer:
-            return API.Trailer.path
+        case .getTrailer(let movieID):
+            return String(format: API.Trailer.path, movieID)
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .getTrailer:
+        case .getTrailer(_):
             var parameters: [String: Any] = [:]
             parameters[API.Parameters.APIKey] = API.ParametersValue.APIKeyValue
             parameters[API.Parameters.LANGUAGE] = API.ParametersValue.LanguageValue

@@ -53,7 +53,8 @@ struct API {
     }
     
     struct Trailer {
-        static let path = "/movie/%@/videos"
+        static let path = "/movie/%d/videos"
+        static let youtubePath = "https://www.youtube.com/embed/%@"
         struct ParamKeys {
           static let apiKey = "api_key"
           static let language = "language"

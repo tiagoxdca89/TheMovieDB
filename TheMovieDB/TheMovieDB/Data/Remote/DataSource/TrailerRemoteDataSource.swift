@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol TrailerRemoteDataSourceProtocol {
-    func getTrailer() -> Single<TrailerResponse>
+    func getTrailer(movieID: Int) -> Single<TrailerResponse>
 }
 
 class TrailerRemoteDataSource: TrailerRemoteDataSourceProtocol {
@@ -21,7 +21,7 @@ class TrailerRemoteDataSource: TrailerRemoteDataSourceProtocol {
         self.requestService = service
     }
     
-    func getTrailer() -> Single<TrailerResponse> {
-        return requestService.request(TrailerRequest.getTrailer)
+    func getTrailer(movieID: Int) -> Single<TrailerResponse> {
+        return requestService.request(TrailerRequest.getTrailer(movieID: movieID))
     }
 }

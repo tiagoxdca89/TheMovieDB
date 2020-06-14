@@ -26,6 +26,8 @@ class SearchCell: UITableViewCell {
         duration.text = "\(movie.runtime)"
         rate.text = "\(movie.vote_average)"
         setupImage(url: movie.getPosterEndPoint(), imageView: posterImageView)
+        posterImageView.layer.borderWidth = 3
+        posterImageView.layer.borderColor = UIColor(named: "red")?.cgColor
     }
     
     private func setupImage(url: String, imageView: UIImageView) {

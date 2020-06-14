@@ -34,7 +34,8 @@ class TabBarCoordinator: NSObject, Coordinator {
         
         let searchNavigationController = UINavigationController()
         searchNavigationController.navigationBar.barTintColor = UIColor.black
-        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
+        searchNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
         searchNavigationController.navigationBar.prefersLargeTitles = true
         
         searchNavigationController.tabBarItem = UITabBarItem(
@@ -44,6 +45,13 @@ class TabBarCoordinator: NSObject, Coordinator {
         let favoritesNavigationController = UINavigationController()
         favoritesNavigationController.tabBarItem = UITabBarItem(
             tabBarSystemItem: .favorites, tag: 2)
+        
+        favoritesNavigationController.navigationBar.barTintColor = UIColor.black
+        favoritesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+        favoritesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+        
+        favoritesNavigationController.navigationBar.prefersLargeTitles = true
+        
         let favoritesCoordinator = FavoritesCoordinator(navigationController: favoritesNavigationController)
         
         tabBarController.viewControllers = [releasesNavigationController,

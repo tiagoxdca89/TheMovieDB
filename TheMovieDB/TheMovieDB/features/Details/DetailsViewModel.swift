@@ -13,8 +13,10 @@ import RxCocoa
 // MARK: Protocol
 
 protocol DetailsViewModelProtocol: BaseViewModelProtocol {
+    var trailerURLString: Driver<String> { get }
     var movieDetail: Driver<Movie> { get }
     func saveToFavorites(poster: Data?, backDrop: Data?)
+    func getTrailer()
 }
 
 // MARK: - Class
@@ -24,17 +26,27 @@ class DetailsViewModel: BaseViewModel {
     var movie: Movie
     let detailUseCase: DetailUseCaseProtocol
     let favoriteUseCase: FavoritesUseCaseProtocol
+    let trailerUseCase: TrailerUseCaseProtocol
     
     var movieDetail: Driver<Movie> {
         return _movieDetail.asDriver(onErrorJustReturn: Movie())
     }
     
-    private let _movieDetail = PublishSubject<Movie>()
+    var trailerURLString: Driver<String> {
+        return _trailerURLString.asDriver(onErrorJustReturn: "")
+    }
     
-    init(movie: Movie, useCase: DetailUseCaseProtocol, favoriteUseCase: FavoritesUseCaseProtocol) {
+    private let _movieDetail = PublishSubject<Movie>()
+    private let _trailerURLString = PublishSubject<String>()
+    
+    init(movie: Movie,
+         useCase: DetailUseCaseProtocol,
+         favoriteUseCase: FavoritesUseCaseProtocol,
+         trailerUseCase: TrailerUseCaseProtocol) {
         self.movie = movie
         self.detailUseCase = useCase
         self.favoriteUseCase = favoriteUseCase
+        self.trailerUseCase = trailerUseCase
     }
     
     override func viewDidLoad() {
@@ -53,6 +65,19 @@ class DetailsViewModel: BaseViewModel {
             .disposed(by: bag)
     }
     
+    func getTrailer() {
+        guard let id = movie.id else { return }
+        trailerUseCase.getTrailer(movieID: id).asObservable()
+            .subscribe(onNext: { [weak self] trailer in
+                guard let key = trailer?.key else { return }
+                let stringURL = String(format: API.Trailer.youtubePath, key)
+                self?._trailerURLString.onNext(stringURL)
+            }, onError: { (error: Error) in
+                debugPrint("[ERROR] => \(error.localizedDescription)")
+            })
+            .disposed(by: bag)
+    }
+    
     private func setupBindings() {
         detailUseCase.getDetailMovie(movie: movie)
             .subscribe(onSuccess: { [weak self] (movie) in
@@ -62,7 +87,6 @@ class DetailsViewModel: BaseViewModel {
             })
             .disposed(by: bag)
     }
-    
 }
 
 extension DetailsViewModel: DetailsViewModelProtocol {}

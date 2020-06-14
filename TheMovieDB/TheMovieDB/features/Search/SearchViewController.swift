@@ -22,6 +22,8 @@ class SearchViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.title = "SEARCH A MOVIE"
         setupTableView()
         setupSearchController()
         viewModel?.viewDidLoad()
@@ -89,10 +91,12 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func setupSearchController() {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
-        searchController.searchBar.tintColor = .black
+        searchController.searchBar.tintColor = .white
         searchController.searchBar.barTintColor = .black
-        navigationItem.searchController = searchController
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.backgroundColor = .black
         searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

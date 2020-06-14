@@ -21,6 +21,8 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "YOUR FAVORITES"
+        tableView.separatorStyle = .none
         viewModel?.fetchedResultsController.delegate = self
     }
 
@@ -40,6 +42,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let favoriteMovie = viewModel?.fetchedResultsController.fetchedObjects?[indexPath.row]
         guard let movie = viewModel?.convertMovie(favorite: favoriteMovie) else { return }
         coordinator?.coordinateToDetail(movie: movie)

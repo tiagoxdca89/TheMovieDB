@@ -25,12 +25,21 @@ struct DetailsBuilder {
     private static func buildViewModel(movie: Movie) -> DetailsViewModelProtocol {
         let useCase = buildDetailUseCase()
         let favoritesUseCase = buildFavoritesUseCase()
-        return DetailsViewModel(movie: movie, useCase: useCase, favoriteUseCase: favoritesUseCase)
+        let trailerUseCase = buildTrailerUseCase()
+        return DetailsViewModel(movie: movie,
+                                useCase: useCase,
+                                favoriteUseCase: favoritesUseCase,
+                                trailerUseCase: trailerUseCase)
     }
     
     private static func buildDetailUseCase() -> DetailUseCaseProtocol {
         let dataSource = MovieRemoteDataSource(service: requestService)
         return DetailUseCase(dataSource: dataSource)
+    }
+    
+    private static func buildTrailerUseCase() -> TrailerUseCaseProtocol {
+        let remoteDataSource = TrailerRemoteDataSource(service: requestService)
+        return TrailerUseCase(remoteDataSource: remoteDataSource)
     }
     
     private static func buildFavoritesUseCase() -> FavoritesUseCaseProtocol {
