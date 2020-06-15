@@ -14,6 +14,7 @@ protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
     var dataSource: Driver <[Movie]> { get }
     var selectedMovie: Driver<Movie> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
+    func viewWillAppear()
 }
 
 class LastReleasesViewModel: BaseViewModel {
@@ -45,15 +46,12 @@ class LastReleasesViewModel: BaseViewModel {
         setupBindings()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        getLastReleases()
+    }
+    
     private func setupBindings() {
-        lastReleasesUseCase.getLastReleases()
-            .subscribe(onSuccess: { [weak self] movies in
-                guard let self = self else { return }
-                self._dataSource.onNext(movies)
-            }, onError: { (error: Error) in
-                debugPrint("[ERROR] => \(error)")
-            })
-            .disposed(by: bag)
         
         selectedIndexPath.map { $0.row }
             .subscribe(onNext: { [weak self] index in
@@ -65,6 +63,18 @@ class LastReleasesViewModel: BaseViewModel {
                 debugPrint("[Error] = \(error)")
             })
             .disposed(by: bag)
+    }
+    
+    private func getLastReleases() {
+        lastReleasesUseCase.getLastReleases()
+        .subscribe(onSuccess: { [weak self] movies in
+            guard let self = self else { return }
+            self._dataSource.onNext(movies)
+        }, onError: { [weak self] (error: Error) in
+            self?.presentError(error: error)
+            debugPrint("[ERROR] => \(error)")
+        })
+        .disposed(by: bag)
     }
     
 }

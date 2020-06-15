@@ -39,6 +39,26 @@ class MessageManager {
         view.backgroundColor = UIColor(named: "gold")
 
         SwiftMessages.show(config: config, view: view)
+    }
+    
+    func present(error: Error) {
+        var config = SwiftMessages.Config()
+
+        config.presentationStyle = .center
+        config.duration = .forever
+        config.dimMode = .gray(interactive: true)
+        config.interactiveHide = false
         
+        let view = MessageView.viewFromNib(layout: .centeredView)
+        view.configureDropShadow()
+        view.configureContent(title: "NO INTERNET ", body: "")
+        view.iconImageView?.image = UIImage(named: "no_internet")
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        view.bodyLabel?.isHidden = true
+        view.button?.isHidden = true
+        view.iconLabel?.isHidden = true
+        view.backgroundColor = UIColor(named: "red")
+
+        SwiftMessages.show(config: config, view: view)
     }
 }

@@ -15,6 +15,8 @@ import RxCocoa
 protocol BaseViewModelProtocol {
     var bag: DisposeBag { get }
     func viewDidLoad()
+    func viewWillAppear()
+    func presentError(error: Error)
 }
 
 // MARK: Class
@@ -23,4 +25,12 @@ class BaseViewModel: BaseViewModelProtocol {
     
     var bag: DisposeBag = DisposeBag()
     func viewDidLoad() {}
+    func viewWillAppear() {}
+    
+}
+
+extension BaseViewModelProtocol {
+    func presentError(error: Error) {
+        MessageManager.shared.present(error: error)
+    }
 }

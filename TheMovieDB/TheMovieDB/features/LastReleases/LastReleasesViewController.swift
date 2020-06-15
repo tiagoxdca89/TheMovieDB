@@ -29,6 +29,11 @@ class LastReleasesViewController: UIViewController {
         setupBinding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.viewWillAppear()
+    }
+    
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
         

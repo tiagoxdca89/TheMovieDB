@@ -14,11 +14,11 @@ enum GenericError: Error {
 }
 enum RemoteFetchError: Error {
     case url
-    case taskError(error: Error)
+    case taskError
     case noResponse
     case noData
     case decoding
-    case responseStatusCode(code: Int)
+    case responseStatusCode
     case invalidJSON
     case noInternet
 }

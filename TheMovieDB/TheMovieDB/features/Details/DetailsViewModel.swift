@@ -82,8 +82,8 @@ class DetailsViewModel: BaseViewModel {
         detailUseCase.getDetailMovie(movie: movie)
             .subscribe(onSuccess: { [weak self] (movie) in
                 self?._movieDetail.onNext(movie)
-            }, onError: { (error: Error) in
-                print("[ERROR] = \(error.localizedDescription)")
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
             })
             .disposed(by: bag)
     }

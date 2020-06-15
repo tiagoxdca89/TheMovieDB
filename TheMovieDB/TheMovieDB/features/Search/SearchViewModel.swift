@@ -44,6 +44,10 @@ class SearchViewModel: BaseViewModel {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBinding()
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
         getTopRated()
     }
     
@@ -65,7 +69,7 @@ class SearchViewModel: BaseViewModel {
             .subscribe(onNext: { [weak self] movies in
                 self?._dataSource.onNext(movies)
             }, onError: { (error: Error) in
-                debugPrint("[ERROR] = \(error.localizedDescription)")
+                self.presentError(error: error)
             })
             .disposed(by: bag)
     }
@@ -74,8 +78,8 @@ class SearchViewModel: BaseViewModel {
         searchUseCase.getMovies(title).asObservable()
             .subscribe(onNext: { [weak self] movies in
                 self?._dataSource.onNext(movies)
-            }, onError: { (error: Error) in
-                debugPrint("[ERROR] =>")
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
             })
             .disposed(by: bag)
     }
