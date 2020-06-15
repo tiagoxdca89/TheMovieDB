@@ -55,7 +55,6 @@ class DetailsViewController: UIViewController {
                 if let url = URL(string: urlString) {
                     let safariVC = SFSafariViewController(url: url)
                     self?.present(safariVC, animated: true)
-//                    UIApplication.shared.open(url)
                 }
             })
             .disposed(by: bag)
@@ -81,6 +80,8 @@ extension DetailsViewController {
     
     fileprivate func setupUI(movie: Movie) {
         let posterURL = movie.getPosterEndPoint()
+        poster.layer.borderColor = UIColor(named: "gold")?.cgColor
+        poster.layer.borderWidth = 2.0
         let backdrop = movie.getBackDropURL()
         setupImage(url: posterURL, imageView: poster)
         setupImage(url: backdrop, imageView: backdrop_img)
@@ -91,6 +92,9 @@ extension DetailsViewController {
         overview.text = movie.overview
         votes.text = "\(movie.vote_average ?? 0.0)"
         categories.text = getGenders(genders: movie.genres)
+        
+        btn_addFavorites.layer.cornerRadius = 5
+        btn_addFavorites.titleLabel?.font = .boldSystemFont(ofSize: 18)
     }
     
     fileprivate func getGenders(genders: [GenreModel]?) -> String {

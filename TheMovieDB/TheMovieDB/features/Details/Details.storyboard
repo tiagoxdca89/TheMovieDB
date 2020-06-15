@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,20 +50,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODD-Fz-Yui" userLabel="View2">
                                                 <rect key="frame" x="0.0" y="245.5" width="414" height="163.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="n3c-79-T4G">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="n3c-79-T4G">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OcN-tG-zS8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="81.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Man: Le premier homme sur la lune" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-km-vHM">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Man: Le premier homme sur la lune" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-km-vHM">
                                                                         <rect key="frame" x="8" y="0.0" width="406" height="81.5"/>
-                                                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="25"/>
-                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="30"/>
+                                                                        <color key="textColor" name="gold"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="V2x-km-vHM" firstAttribute="leading" secondItem="OcN-tG-zS8" secondAttribute="leading" constant="8" id="W7q-3Q-0tL"/>
                                                                     <constraint firstItem="V2x-km-vHM" firstAttribute="top" secondItem="OcN-tG-zS8" secondAttribute="top" id="c3H-Je-6g6"/>
@@ -70,17 +71,17 @@
                                                                     <constraint firstAttribute="trailing" secondItem="V2x-km-vHM" secondAttribute="trailing" id="v9t-3q-Gdv"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Hd-0F8">
+                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Hd-0F8">
                                                                 <rect key="frame" x="0.0" y="81.5" width="414" height="41"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Man (original title)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSz-n8-E8K">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="First Man (original title)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSz-n8-E8K">
                                                                         <rect key="frame" x="8" y="0.0" width="406" height="41"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="wSz-n8-E8K" secondAttribute="bottom" id="IMC-xD-cZe"/>
                                                                     <constraint firstItem="wSz-n8-E8K" firstAttribute="top" secondItem="U3F-Hd-0F8" secondAttribute="top" id="ONq-oi-Uvp"/>
@@ -88,7 +89,7 @@
                                                                     <constraint firstAttribute="trailing" secondItem="wSz-n8-E8K" secondAttribute="trailing" id="wgo-kn-BhX"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u02-b6-7G3">
+                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="u02-b6-7G3">
                                                                 <rect key="frame" x="0.0" y="122.5" width="414" height="41"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wEa-0d-Lo8">
@@ -97,19 +98,19 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(2018)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KI-Q2-nQg">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="83" height="41"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 21min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCx-bR-ggz">
                                                                                 <rect key="frame" x="83" y="0.0" width="82.5" height="41"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biography, Drama, History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn5-eE-Lei">
                                                                                 <rect key="frame" x="165.5" y="0.0" width="248.5" height="41"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                                <color key="textColor" name="gold"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -120,7 +121,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="wEa-0d-Lo8" firstAttribute="top" secondItem="u02-b6-7G3" secondAttribute="top" id="4sS-B4-VPi"/>
                                                                     <constraint firstAttribute="bottom" secondItem="wEa-0d-Lo8" secondAttribute="bottom" id="eZo-Kh-eq1"/>
@@ -135,7 +136,7 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="n3c-79-T4G" secondAttribute="bottom" id="BZL-nI-G1B"/>
                                                     <constraint firstItem="n3c-79-T4G" firstAttribute="leading" secondItem="ODD-Fz-Yui" secondAttribute="leading" id="Nnd-ji-8Aa"/>
@@ -146,37 +147,37 @@
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="kIp-CZ-jHu" userLabel="View3">
                                                 <rect key="frame" x="0.0" y="409" width="414" height="327"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sh3-pi-Tq1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="262"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </imageView>
                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="p3Z-gl-6PA">
                                                         <rect key="frame" x="138" y="0.0" width="276" height="327"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqv-pR-7DO">
-                                                                <rect key="frame" x="6" y="0.0" width="264" height="264"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqv-pR-7DO">
+                                                                <rect key="frame" x="6" y="0.0" width="264" height="327"/>
                                                                 <string key="text">The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.</string>
                                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="oqv-pR-7DO" firstAttribute="top" secondItem="p3Z-gl-6PA" secondAttribute="top" id="Jro-vH-ShR"/>
+                                                            <constraint firstItem="oqv-pR-7DO" firstAttribute="top" secondItem="p3Z-gl-6PA" secondAttribute="top" id="5E0-6v-SK6"/>
+                                                            <constraint firstAttribute="bottom" secondItem="oqv-pR-7DO" secondAttribute="bottom" id="Bgt-SY-m2c"/>
                                                             <constraint firstItem="oqv-pR-7DO" firstAttribute="leading" secondItem="p3Z-gl-6PA" secondAttribute="leading" constant="6" id="lMY-Wj-QEc"/>
                                                             <constraint firstAttribute="trailing" secondItem="oqv-pR-7DO" secondAttribute="trailing" constant="6" id="ySS-8L-rbK"/>
                                                         </constraints>
                                                     </view>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sh3-pi-Tq1">
+                                                        <rect key="frame" x="0.0" y="32" width="138" height="262"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="Sh3-pi-Tq1" firstAttribute="top" secondItem="kIp-CZ-jHu" secondAttribute="top" id="1zt-VF-Jzp"/>
-                                                    <constraint firstItem="Sh3-pi-Tq1" firstAttribute="height" secondItem="kIp-CZ-jHu" secondAttribute="height" multiplier="4/5" id="DOV-06-HUJ"/>
+                                                    <constraint firstItem="Sh3-pi-Tq1" firstAttribute="height" secondItem="kIp-CZ-jHu" secondAttribute="height" multiplier="4/5" id="1zU-34-Xnt"/>
+                                                    <constraint firstItem="Sh3-pi-Tq1" firstAttribute="centerY" secondItem="kIp-CZ-jHu" secondAttribute="centerY" id="3xC-5N-xr8"/>
                                                     <constraint firstItem="p3Z-gl-6PA" firstAttribute="width" secondItem="kIp-CZ-jHu" secondAttribute="width" multiplier="2/3" id="Ebj-ua-xAE"/>
                                                     <constraint firstAttribute="bottom" secondItem="p3Z-gl-6PA" secondAttribute="bottom" id="EcY-F5-9zE"/>
                                                     <constraint firstItem="Sh3-pi-Tq1" firstAttribute="width" secondItem="kIp-CZ-jHu" secondAttribute="width" multiplier="1/3" id="GGe-of-gaI"/>
-                                                    <constraint firstItem="Sh3-pi-Tq1" firstAttribute="leading" secondItem="kIp-CZ-jHu" secondAttribute="leading" id="IE7-Lq-1IG"/>
                                                     <constraint firstItem="p3Z-gl-6PA" firstAttribute="top" secondItem="kIp-CZ-jHu" secondAttribute="top" id="aDv-Cm-pLf"/>
                                                     <constraint firstAttribute="trailing" secondItem="p3Z-gl-6PA" secondAttribute="trailing" id="mng-nf-n9x"/>
                                                 </constraints>
@@ -241,7 +242,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="BGd-PQ-NwV" secondAttribute="bottom" id="7c5-NP-Thv"/>
                                                     <constraint firstItem="BGd-PQ-NwV" firstAttribute="width" secondItem="O1J-GS-CDM" secondAttribute="width" multiplier="1/3" id="8We-nq-h7o"/>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="100" id="HIh-2g-I0s"/>
+                                                    <constraint firstAttribute="height" constant="100" id="HIh-2g-I0s"/>
                                                     <constraint firstItem="BGd-PQ-NwV" firstAttribute="leading" secondItem="O1J-GS-CDM" secondAttribute="leading" id="Hyg-F8-SLQ"/>
                                                     <constraint firstAttribute="bottom" secondItem="3nt-cb-frI" secondAttribute="bottom" id="Q84-8K-Ty3"/>
                                                     <constraint firstItem="BGd-PQ-NwV" firstAttribute="top" secondItem="O1J-GS-CDM" secondAttribute="top" id="Vzj-kj-D3o"/>
@@ -299,5 +300,8 @@
         <image name="play.rectangle" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="gold">
+            <color red="1" green="0.6380000114440918" blue="0.0020000000949949026" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
