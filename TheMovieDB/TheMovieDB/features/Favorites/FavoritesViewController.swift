@@ -25,6 +25,17 @@ class FavoritesViewController: UIViewController {
         tableView.separatorStyle = .none
         viewModel?.fetchedResultsController.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showEmptyListPopup()
+    }
+    
+    private func showEmptyListPopup() {
+        if viewModel?.fetchedResultsController.fetchedObjects?.count == 0 {
+            MessageManager.shared.show(title: "Favorite Movies", body: "The list is empty", imageName: "favorite_popup", colorName: "red")
+        }
+    }
 
 }
 
@@ -50,7 +61,9 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-        case .delete: viewModel?.deleteMovie(at: indexPath)
+        case .delete:
+            viewModel?.deleteMovie(at: indexPath)
+            showEmptyListPopup()
         default: ()
         }
     }

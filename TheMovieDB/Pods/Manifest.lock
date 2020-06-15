@@ -10,6 +10,9 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - SwiftMessages (7.0.1):
+    - SwiftMessages/App (= 7.0.1)
+  - SwiftMessages/App (7.0.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -17,6 +20,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - RxCocoa
   - RxSwift
+  - SwiftMessages
 
 SPEC REPOS:
   trunk:
@@ -26,6 +30,7 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SwiftMessages
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
@@ -34,7 +39,8 @@ SPEC CHECKSUMS:
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 25056721473b68a3c107a641d6d060bf13732cec
+PODFILE CHECKSUM: 76055a4a03967a157b8ccd36a9e1b06cfac2cec9
 
 COCOAPODS: 1.9.1
