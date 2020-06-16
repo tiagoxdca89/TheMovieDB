@@ -57,11 +57,13 @@ class DetailsViewModel: BaseViewModel {
     func saveToFavorites(poster: Data?, backDrop: Data?) {
         movie.poster = poster
         movie.backdrop = backDrop
-        favoriteUseCase.save(movie: movie).asObservable().subscribe(onNext: { _ in
-            debugPrint("[SAVED]")
-        }, onError: { (error: Error) in
-            debugPrint("[ERROR] => \(error)")
-        })
+        favoriteUseCase.save(movie: movie)
+            .asObservable()
+            .subscribe(onNext: { _ in
+                debugPrint("[SAVED]")
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
+            })
             .disposed(by: bag)
     }
     
@@ -72,8 +74,8 @@ class DetailsViewModel: BaseViewModel {
                 guard let key = trailer?.key else { return }
                 let stringURL = String(format: API.Trailer.youtubePath, key)
                 self?._trailerURLString.onNext(stringURL)
-            }, onError: { (error: Error) in
-                debugPrint("[ERROR] => \(error.localizedDescription)")
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
             })
             .disposed(by: bag)
     }

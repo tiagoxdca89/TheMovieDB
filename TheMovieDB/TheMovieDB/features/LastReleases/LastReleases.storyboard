@@ -36,41 +36,16 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UbJ-bZ-woh">
                                                     <rect key="frame" x="0.0" y="0.0" width="156" height="243"/>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzs-EN-9aP">
-                                                    <rect key="frame" x="90" y="96.5" width="50" height="50"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0z-8Y-4GY">
-                                                            <rect key="frame" x="0.0" y="2.5" width="50" height="45"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <state key="normal" backgroundImage="arrow.right" catalog="system"/>
-                                                            <connections>
-                                                                <action selector="tapOnbutton:" destination="zjg-c7-PfE" eventType="touchUpInside" id="QBb-hB-cY0"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.65087642770862941" green="0.15193438394834874" blue="0.13364958404239841" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="b0z-8Y-4GY" firstAttribute="width" secondItem="qzs-EN-9aP" secondAttribute="width" id="5of-uQ-JMA"/>
-                                                        <constraint firstAttribute="width" constant="50" id="6kf-fC-u1Y"/>
-                                                        <constraint firstItem="b0z-8Y-4GY" firstAttribute="centerY" secondItem="qzs-EN-9aP" secondAttribute="centerY" id="OA7-GW-Lva"/>
-                                                        <constraint firstItem="b0z-8Y-4GY" firstAttribute="centerX" secondItem="qzs-EN-9aP" secondAttribute="centerX" id="PpB-Oh-6Fs"/>
-                                                        <constraint firstAttribute="height" constant="50" id="TIO-V2-uC0"/>
-                                                        <constraint firstItem="b0z-8Y-4GY" firstAttribute="height" secondItem="qzs-EN-9aP" secondAttribute="height" id="g1t-Y6-8KI"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="UbJ-bZ-woh" firstAttribute="top" secondItem="zgM-eo-J6w" secondAttribute="top" id="1wy-oW-iTQ"/>
-                                                <constraint firstItem="qzs-EN-9aP" firstAttribute="centerY" secondItem="zgM-eo-J6w" secondAttribute="centerY" id="3ap-bw-Q0H"/>
                                                 <constraint firstAttribute="trailing" secondItem="UbJ-bZ-woh" secondAttribute="trailing" id="HZh-ci-aU3"/>
                                                 <constraint firstItem="UbJ-bZ-woh" firstAttribute="leading" secondItem="zgM-eo-J6w" secondAttribute="leading" id="OxV-5J-uWo"/>
                                                 <constraint firstAttribute="bottom" secondItem="UbJ-bZ-woh" secondAttribute="bottom" id="QPQ-i2-ghR"/>
-                                                <constraint firstAttribute="trailing" secondItem="qzs-EN-9aP" secondAttribute="trailing" constant="16" id="zTn-1C-hYO"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="156" height="243"/>
                                         <connections>
-                                            <outlet property="btnDetails" destination="b0z-8Y-4GY" id="Gi4-ai-GPY"/>
                                             <outlet property="imageView" destination="UbJ-bZ-woh" id="Hpc-uq-QqN"/>
                                         </connections>
                                     </collectionViewCell>
@@ -95,7 +70,4 @@
             <point key="canvasLocation" x="-165.21739130434784" y="190.84821428571428"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="arrow.right" catalog="system" width="128" height="98"/>
-    </resources>
 </document>

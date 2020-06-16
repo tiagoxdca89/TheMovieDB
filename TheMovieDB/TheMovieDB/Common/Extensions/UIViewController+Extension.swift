@@ -17,4 +17,8 @@ extension UIViewController {
             MBProgressHUD.hide(for: view, animated: true)
         }
     }
+    
+    func minutesToHoursMinutes (minutes : Int) -> (hours : Int , leftMinutes : Int) {
+        return (minutes / 60, (minutes % 60))
+    }
 }

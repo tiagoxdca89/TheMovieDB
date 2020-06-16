@@ -31,6 +31,10 @@
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-qj-9q5">
                                                         <rect key="frame" x="138" y="83" width="138" height="79"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="B5N-xJ-dTY"/>
+                                                            <constraint firstAttribute="height" constant="80" id="aD4-5K-RoY"/>
+                                                        </constraints>
                                                         <color key="tintColor" red="0.8902680838" green="0.2070635129" blue="0.17371135160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" backgroundImage="play.rectangle" catalog="system"/>
                                                     </button>
@@ -39,9 +43,7 @@
                                                 <constraints>
                                                     <constraint firstItem="hL4-qj-9q5" firstAttribute="centerX" secondItem="l2U-YP-kwC" secondAttribute="centerX" id="6sg-zN-hF6"/>
                                                     <constraint firstItem="lsG-hF-MV8" firstAttribute="leading" secondItem="l2U-YP-kwC" secondAttribute="leading" id="9Cu-tm-WYK"/>
-                                                    <constraint firstItem="hL4-qj-9q5" firstAttribute="width" secondItem="l2U-YP-kwC" secondAttribute="width" multiplier="1/3" id="BN0-qw-953"/>
                                                     <constraint firstItem="hL4-qj-9q5" firstAttribute="centerY" secondItem="l2U-YP-kwC" secondAttribute="centerY" id="LqF-ah-0aA"/>
-                                                    <constraint firstItem="hL4-qj-9q5" firstAttribute="height" secondItem="l2U-YP-kwC" secondAttribute="height" multiplier="1/3" id="NMa-mG-zmR"/>
                                                     <constraint firstAttribute="bottom" secondItem="lsG-hF-MV8" secondAttribute="bottom" id="Y4l-pq-aTQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="lsG-hF-MV8" secondAttribute="trailing" id="ilw-eE-o4D"/>
                                                     <constraint firstItem="lsG-hF-MV8" firstAttribute="top" secondItem="l2U-YP-kwC" secondAttribute="top" id="jBd-rb-FQ5"/>
@@ -56,7 +58,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OcN-tG-zS8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="81.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Man: Le premier homme sur la lune" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-km-vHM">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Man: Le premier homme sur la lune" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-km-vHM">
                                                                         <rect key="frame" x="8" y="0.0" width="406" height="81.5"/>
                                                                         <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="30"/>
                                                                         <color key="textColor" name="gold"/>
@@ -107,9 +109,9 @@
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biography, Drama, History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn5-eE-Lei">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biography, Drama, History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn5-eE-Lei">
                                                                                 <rect key="frame" x="165.5" y="0.0" width="248.5" height="41"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                 <color key="textColor" name="gold"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>

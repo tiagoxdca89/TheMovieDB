@@ -87,17 +87,18 @@ extension DetailsViewController {
         setupImage(url: backdrop, imageView: backdrop_img)
         lbl_title.text = movie.title
         lbl_subtitle.text = movie.original_title
-        lbl_year.text = movie.release_date
-        lbl_duration.text = "\(movie.runtime ?? 0 / 60)"
+        lbl_year.text = String(movie.release_date?.prefix(4) ?? "")
+        let movieMinutes = minutesToHoursMinutes(minutes: movie.runtime ?? 0)
+        lbl_duration.text = "\(movieMinutes.hours)h \(movieMinutes.leftMinutes)m"
         overview.text = movie.overview
-        votes.text = "\(movie.vote_average ?? 0.0)"
+        votes.text = "\(movie.vote_average ?? 0.0) / 10"
         categories.text = getGenders(genders: movie.genres)
         
         btn_addFavorites.layer.cornerRadius = 5
         btn_addFavorites.titleLabel?.font = .boldSystemFont(ofSize: 18)
     }
     
-    fileprivate func getGenders(genders: [GenreModel]?) -> String {
+    private func getGenders(genders: [GenreModel]?) -> String {
         guard let _genders = genders else { return "" }
         var genders_String = ""
         _genders.forEach {
@@ -106,7 +107,7 @@ extension DetailsViewController {
         return genders_String
     }
     
-    fileprivate func setupImage(url: String, imageView: UIImageView) {
+    private func setupImage(url: String, imageView: UIImageView) {
         let processor = DownsamplingImageProcessor(size: poster.bounds.size)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
@@ -118,4 +119,5 @@ extension DetailsViewController {
                 .cacheOriginalImage
             ])
     }
+    
 }

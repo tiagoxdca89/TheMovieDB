@@ -76,8 +76,6 @@ class LastReleasesViewModel: BaseViewModel {
         selectedIndexPath.map { $0.row }
             .subscribe(onNext: { [weak self] index in
                 guard let self = self else { return }
-//                let movies = (try? self._dataSource.value()) ?? []
-//                let movie = self.movies[index]
                 self._selectedMovie.onNext(self.movies[index])
             }, onError: { (error: Error) in
                 debugPrint("[Error] = \(error)")
