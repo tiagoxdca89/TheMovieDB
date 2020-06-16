@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol TopRatedRemoteDataSourceProtocol {
-    func getTopRated() -> Single<MovieResponse>
+    func getTopRated(page: Int) -> Single<MovieResponse>
 }
 
 class TopRatedRemoteDataSource: TopRatedRemoteDataSourceProtocol {
@@ -22,8 +22,8 @@ class TopRatedRemoteDataSource: TopRatedRemoteDataSourceProtocol {
         self.requestService = service
     }
     
-    func getTopRated() -> Single<MovieResponse> {
-        return requestService.request(TopRatedRequest.getTopRatedMovies)
+    func getTopRated(page: Int) -> Single<MovieResponse> {
+        return requestService.request(TopRatedRequest.getTopRatedMovies(page: page))
     }
     
 }

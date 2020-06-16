@@ -22,7 +22,7 @@ protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
 class LastReleasesViewModel: BaseViewModel {
     
     var moviesCount: Int {
-        let movies = (try? self._dataSource.value()) ?? []
+//        let movies = (try? self._dataSource.value()) ?? []
         return movies.count
     }
     
@@ -43,8 +43,8 @@ class LastReleasesViewModel: BaseViewModel {
     // MARK: - Private properties
     
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
-    private var movies: [Movie] = []
     private var _selectedMovie = PublishSubject<Movie>()
+    private var movies: [Movie] = []
     private var isLoaging = false
     private var page: Int = 0
     private var totalPages = 500
@@ -76,9 +76,9 @@ class LastReleasesViewModel: BaseViewModel {
         selectedIndexPath.map { $0.row }
             .subscribe(onNext: { [weak self] index in
                 guard let self = self else { return }
-                let movies = (try? self._dataSource.value()) ?? []
-                let movie = movies[index]
-                self._selectedMovie.onNext(movie)
+//                let movies = (try? self._dataSource.value()) ?? []
+//                let movie = self.movies[index]
+                self._selectedMovie.onNext(self.movies[index])
             }, onError: { (error: Error) in
                 debugPrint("[Error] = \(error)")
             })
@@ -92,7 +92,7 @@ class LastReleasesViewModel: BaseViewModel {
             isLoaging = true
             lastReleasesUseCase.getLastReleases(page: page)
                 .asObservable()
-                .subscribe(onNext: { [weak self] (result: ReleasesResult) in
+                .subscribe(onNext: { [weak self] (result: MoviesResult) in
                     guard let self = self else { return }
                     self.movies.append(contentsOf: result.movies)
                     self._dataSource.onNext(self.movies)

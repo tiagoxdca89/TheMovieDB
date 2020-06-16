@@ -10,7 +10,7 @@ import Foundation
 
 enum TopRatedRequest: URLRequestBuilder {
     
-    case getTopRatedMovies
+    case getTopRatedMovies(page: Int)
     
     var path: String {
         switch self {
@@ -21,11 +21,11 @@ enum TopRatedRequest: URLRequestBuilder {
     
     var parameters: [String : Any]? {
         switch self {
-        case .getTopRatedMovies:
+        case .getTopRatedMovies(let page):
             var parameters: [String: Any] = [:]
             parameters[API.Parameters.APIKey] = API.ParametersValue.APIKeyValue
             parameters[API.Parameters.LANGUAGE] = API.ParametersValue.LanguageValue
-            parameters[API.TopRated.ParamKeys.page] = 1
+            parameters[API.TopRated.ParamKeys.page] = page
             return parameters
         }
     }

@@ -107,4 +107,11 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let viewModel = viewModel else { return }
+        if (indexPath.row == viewModel.moviesCount - 10) {
+            viewModel.loadNextPage.onNext(())
+        }
+    }
 }

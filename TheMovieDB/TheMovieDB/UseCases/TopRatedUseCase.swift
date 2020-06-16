@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol TopRatedUseCaseProtocol {
-    func getTopRated() -> Single<[Movie]>
+    func getTopRated(page: Int) -> Single<MoviesResult>
 }
 
 class TopRatedUseCase: TopRatedUseCaseProtocol {
@@ -21,7 +21,7 @@ class TopRatedUseCase: TopRatedUseCaseProtocol {
         self.remoteDataSource = remoteDataSource
     }
     
-    func getTopRated() -> Single<[Movie]> {
-        return remoteDataSource.getTopRated().map { $0.results }
+    func getTopRated(page: Int) -> Single<MoviesResult> {
+        return remoteDataSource.getTopRated(page: page).map { ($0.results, $0.page, $0.total_pages) }
     }
 }

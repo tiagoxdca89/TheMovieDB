@@ -15,7 +15,7 @@ struct API {
   //MARK: - LastReleases APIs
     
   struct LastReleases {
-      static let path = "/discover/movie"
+      static let path = "/movie/now_playing"
       struct ParamKeys {
         static let apiKey = "api_key"
         static let language = "language"
