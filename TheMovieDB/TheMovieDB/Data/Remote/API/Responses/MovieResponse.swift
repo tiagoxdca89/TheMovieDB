@@ -9,6 +9,8 @@
 import UIKit
 
 struct MovieResponse: Codable {
+    let page: Int
+    let total_pages: Int
     let results: [Movie]
 }
 

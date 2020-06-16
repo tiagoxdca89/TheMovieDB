@@ -9,8 +9,10 @@
 import Foundation
 import RxSwift
 
+typealias ReleasesResult = (movies: [Movie], page: Int, totalPages: Int)
+
 protocol LastReleasesUseCaseProtocol {
-    func getLastReleases() -> Single<[Movie]>
+    func getLastReleases(page: Int) -> Single<ReleasesResult>
 }
 
 class LastReleasesUseCase: LastReleasesUseCaseProtocol {
@@ -21,7 +23,7 @@ class LastReleasesUseCase: LastReleasesUseCaseProtocol {
         self.remoteDataSource = remoteDataSource
     }
     
-    func getLastReleases() -> Single<[Movie]> {
-        return remoteDataSource.getMovie().map { $0.results }
+    func getLastReleases(page: Int) -> Single<ReleasesResult> {
+        return remoteDataSource.getMovies(page: page).map { ($0.results, $0.page, $0.total_pages) }
     }
 }

@@ -10,21 +10,22 @@ import Foundation
 
 enum LastReleasesRequest: URLRequestBuilder {
     
-    case getLastReleases
+    case getLastReleases(page: Int)
     
     var path: String {
         switch self {
-        case .getLastReleases:
+        case .getLastReleases(_):
             return String(format: API.LastReleases.path)
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .getLastReleases:
+        case .getLastReleases(let page):
             var parameters: [String: Any] = [:]
             parameters[API.Parameters.APIKey] = API.ParametersValue.APIKeyValue
             parameters[API.Parameters.LANGUAGE] = API.ParametersValue.LanguageValue
+            parameters[API.LastReleases.ParamKeys.page] = page
             return parameters
         }
     }

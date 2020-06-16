@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol LastReleasesRemoteDataSourceProtocol {
-    func getMovie() -> Single<MovieResponse>
+    func getMovies(page: Int) -> Single<MovieResponse>
 }
 
 class LastReleasesRemoteDataSource: LastReleasesRemoteDataSourceProtocol {
@@ -21,7 +21,7 @@ class LastReleasesRemoteDataSource: LastReleasesRemoteDataSourceProtocol {
         self.requestService = service
     }
     
-    func getMovie() -> Single<MovieResponse> {
-        return requestService.request(LastReleasesRequest.getLastReleases)
+    func getMovies(page: Int) -> Single<MovieResponse> {
+        return requestService.request(LastReleasesRequest.getLastReleases(page: page))
     }
 }

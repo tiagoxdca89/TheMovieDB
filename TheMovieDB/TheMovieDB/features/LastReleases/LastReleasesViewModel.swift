@@ -11,13 +11,20 @@ import RxSwift
 import RxCocoa
 
 protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
+    var moviesCount: Int { get }
     var dataSource: Driver <[Movie]> { get }
     var selectedMovie: Driver<Movie> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
+    var loadNextPage: PublishSubject<Void> { get set }
     func viewWillAppear()
 }
 
 class LastReleasesViewModel: BaseViewModel {
+    
+    var moviesCount: Int {
+        let movies = (try? self._dataSource.value()) ?? []
+        return movies.count
+    }
     
     var dataSource: Driver<[Movie]> {
         return _dataSource.asDriver(onErrorJustReturn: [])
@@ -29,12 +36,18 @@ class LastReleasesViewModel: BaseViewModel {
     
     var selectedIndexPath = PublishSubject<IndexPath>()
     
+    var loadNextPage = PublishSubject<Void>()
+    
     let lastReleasesUseCase: LastReleasesUseCaseProtocol
     
     // MARK: - Private properties
     
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
+    private var movies: [Movie] = []
     private var _selectedMovie = PublishSubject<Movie>()
+    private var isLoaging = false
+    private var page: Int = 0
+    private var totalPages = 500
     
     init(useCase: LastReleasesUseCaseProtocol) {
         self.lastReleasesUseCase = useCase
@@ -42,7 +55,6 @@ class LastReleasesViewModel: BaseViewModel {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBindings()
     }
     
@@ -52,6 +64,14 @@ class LastReleasesViewModel: BaseViewModel {
     }
     
     private func setupBindings() {
+        
+        loadNextPage.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.getLastReleases()
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
+            })
+            .disposed(by: bag)
         
         selectedIndexPath.map { $0.row }
             .subscribe(onNext: { [weak self] index in
@@ -66,17 +86,23 @@ class LastReleasesViewModel: BaseViewModel {
     }
     
     private func getLastReleases() {
-        lastReleasesUseCase.getLastReleases()
-        .subscribe(onSuccess: { [weak self] movies in
-            guard let self = self else { return }
-            self._dataSource.onNext(movies)
-        }, onError: { [weak self] (error: Error) in
-            self?.presentError(error: error)
-            debugPrint("[ERROR] => \(error)")
-        })
-        .disposed(by: bag)
+        let canRequest = moviesCount != totalPages && page <= totalPages && !isLoaging
+        page += 1
+        if canRequest {
+            isLoaging = true
+            lastReleasesUseCase.getLastReleases(page: page)
+                .asObservable()
+                .subscribe(onNext: { [weak self] (result: ReleasesResult) in
+                    guard let self = self else { return }
+                    self.movies.append(contentsOf: result.movies)
+                    self._dataSource.onNext(self.movies)
+                    self.totalPages = result.totalPages
+                    self.isLoaging = false
+                    }, onError: { [weak self] (error: Error) in
+                        self?.presentError(error: error)
+                }).disposed(by: bag)
+        }
     }
-    
 }
 
 extension LastReleasesViewModel: LastReleasesViewModelProtocol {}

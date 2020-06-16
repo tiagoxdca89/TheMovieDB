@@ -66,4 +66,12 @@ extension LastReleasesViewController: UICollectionViewDelegateFlowLayout {
         let height = UIScreen.main.bounds.height / 1.5
         return CGSize(width: width, height: height)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let viewModel = viewModel else { return }
+        if (indexPath.row == viewModel.moviesCount - 10) {
+            viewModel.loadNextPage.onNext(())
+        }
+    }
 }
