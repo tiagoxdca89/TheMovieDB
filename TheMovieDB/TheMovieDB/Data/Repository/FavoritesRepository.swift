@@ -30,14 +30,10 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
     
     private func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
-//        let predicate = NSPredicate(format: "notebook == %@", notebook)
-//        fetchRequest.predicate = predicate
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataManager.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -46,6 +42,12 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
     }
     
     func save(movie: Movie) -> Single<Void> {
+        guard let id = movie.id else { return .just(())}
+        let fetchRequest: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "id == %d", id)
+        fetchRequest.predicate = predicate
+        guard let result = try? coreDataManager.viewContext.fetch(fetchRequest),
+            result.count == 0 else { return .just(()) }
         
         return Single<Void>.create { [weak self] (observer) -> Disposable in
             guard let self = self else { return Disposables.create() }
