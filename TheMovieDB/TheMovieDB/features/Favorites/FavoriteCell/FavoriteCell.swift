@@ -21,7 +21,7 @@ class FavoriteCell: UITableViewCell {
     func setupCell(favorite: FavoriteMovie?) {
         guard let favorite = favorite else { return }
         title.text = favorite.title
-        year.text = favorite.release_date
+        year.text = String(favorite.release_date?.prefix(4) ?? "")
         if let imageData = favorite.poster {
             posterImageView.image = imageData as? UIImage
         } else {
@@ -30,7 +30,7 @@ class FavoriteCell: UITableViewCell {
         posterImageView.layer.cornerRadius = posterImageView.frame.size.width / 2
         posterImageView.clipsToBounds = true
         posterImageView.layer.borderWidth = 3
-        posterImageView.layer.borderColor = UIColor(named: "red")?.cgColor
+        posterImageView.layer.borderColor = UIColor(named: "gold")?.cgColor
     }
     
     private func setupImage(url: String, imageView: UIImageView) {
@@ -40,7 +40,6 @@ class FavoriteCell: UITableViewCell {
             with: URL(string: url),
             options: [
                 .processor(processor),
-                
                 .scaleFactor(posterImageView.contentScaleFactor),
                 .transition(.fade(0.5)),
                 .cacheOriginalImage

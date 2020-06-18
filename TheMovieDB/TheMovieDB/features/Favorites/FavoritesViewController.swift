@@ -12,7 +12,8 @@ import CoreData
 class FavoritesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var emptyImage: UIImageView!
+    
     var viewModel: FavoritesViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
@@ -22,6 +23,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "YOUR FAVORITES"
+        emptyImage.image = UIImage(named: "empty_yellow")
         tableView.separatorStyle = .none
         viewModel?.fetchedResultsController.delegate = self
     }
@@ -32,11 +34,8 @@ class FavoritesViewController: UIViewController {
     }
     
     private func showEmptyListPopup() {
-        if viewModel?.fetchedResultsController.fetchedObjects?.count == 0 {
-            MessageManager.shared.show(title: "Favorite Movies", body: "The list is empty", imageName: "favorite_popup", colorName: "red")
-        }
+        emptyImage.isHidden = viewModel?.fetchedResultsController.fetchedObjects?.count == 0 ? false : true
     }
-
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
