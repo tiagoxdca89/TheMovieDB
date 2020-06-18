@@ -13,7 +13,7 @@ class LastReleasesViewController: UIViewController {
     
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var empty: UIImageView!
     
     var viewModel: LastReleasesViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
@@ -37,9 +37,16 @@ class LastReleasesViewController: UIViewController {
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
         
+        viewModel.emptyList.asObservable()
+            .subscribe(onNext: { [weak self] (empty) in
+                self?.empty.isHidden = !empty
+            })
+            .disposed(by: bag)
+        
         viewModel.dataSource.asObservable()
             .bind(to: self.collectionView.rx
-                .items(cellIdentifier: MovieCell.reuseIdentifier, cellType: MovieCell.self)) { row, movie, cell in
+                .items(cellIdentifier: MovieCell.reuseIdentifier,
+                       cellType: MovieCell.self)) { row, movie, cell in
             cell.load(movie: movie)
         }.disposed(by: bag)
         

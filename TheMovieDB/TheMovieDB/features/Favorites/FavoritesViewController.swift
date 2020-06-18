@@ -23,7 +23,6 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "YOUR FAVORITES"
-        emptyImage.image = UIImage(named: "empty_yellow")
         tableView.separatorStyle = .none
         viewModel?.fetchedResultsController.delegate = self
     }

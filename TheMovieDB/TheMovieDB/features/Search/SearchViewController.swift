@@ -17,6 +17,7 @@ class SearchViewController: UITableViewController {
         didSet { viewModel = oldValue ?? viewModel }
     }
     
+    var imageEmpty: UIImageView?
     var coordinator: SearchCoordinator?
     let bag = DisposeBag()
 
@@ -24,11 +25,12 @@ class SearchViewController: UITableViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "TOP RATED"
+        setupEmptyImage()
         setupTableView()
         setupSearchController()
         viewModel?.viewDidLoad()
-        
         setupBinding()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +40,12 @@ class SearchViewController: UITableViewController {
     
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
+        
+        viewModel.emptyList.asObservable()
+        .subscribe(onNext: { [weak self] (empty) in
+            self?.imageEmpty?.isHidden = !empty
+        })
+        .disposed(by: bag)
         
         viewModel
         .dataSource
@@ -69,16 +77,29 @@ class SearchViewController: UITableViewController {
     
     private func setupTableView() {
         tableView.dataSource = nil
-        tableView.delegate = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
-        
         tableView.tableFooterView = UIView()
+    }
+    
+    private func setupEmptyImage() {
+        imageEmpty = UIImageView(image: UIImage(named: "empty_yellow"))
+        guard let imageEmpty = imageEmpty else { return }
+        view.addSubview(imageEmpty)
+        imageEmpty.isHidden = true
+        imageEmpty.translatesAutoresizingMaskIntoConstraints = false
+        imageEmpty.contentMode = .scaleAspectFit
+        NSLayoutConstraint.activate([
+            imageEmpty.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
+            imageEmpty.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2/3),
+            imageEmpty.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageEmpty.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+           ])
+        view.bringSubviewToFront(imageEmpty)
     }
 
 }
 
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
@@ -88,9 +109,6 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel?.getTopRated()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
     }
     
     func setupSearchController() {

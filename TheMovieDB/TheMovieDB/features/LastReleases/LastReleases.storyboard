@@ -51,18 +51,26 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-mO-FGU">
+                                <rect key="frame" x="0.0" y="149.5" width="414" height="597"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jxT-ul-Xl1" firstAttribute="trailing" secondItem="hGq-SD-UrZ" secondAttribute="trailing" id="2hj-Yg-pGB"/>
                             <constraint firstItem="hGq-SD-UrZ" firstAttribute="top" secondItem="jxT-ul-Xl1" secondAttribute="top" id="MQd-lr-3jZ"/>
+                            <constraint firstItem="4fQ-mO-FGU" firstAttribute="centerY" secondItem="FMY-Ad-lkx" secondAttribute="centerY" id="RO6-7t-fMR"/>
                             <constraint firstItem="hGq-SD-UrZ" firstAttribute="leading" secondItem="jxT-ul-Xl1" secondAttribute="leading" id="fVj-e7-cW7"/>
+                            <constraint firstItem="4fQ-mO-FGU" firstAttribute="height" secondItem="FMY-Ad-lkx" secondAttribute="height" multiplier="2/3" id="hOD-eg-RaS"/>
+                            <constraint firstItem="4fQ-mO-FGU" firstAttribute="centerX" secondItem="FMY-Ad-lkx" secondAttribute="centerX" id="nnr-NE-WAe"/>
+                            <constraint firstItem="4fQ-mO-FGU" firstAttribute="width" secondItem="FMY-Ad-lkx" secondAttribute="width" id="qJb-FH-jn3"/>
                             <constraint firstItem="hGq-SD-UrZ" firstAttribute="bottom" secondItem="jxT-ul-Xl1" secondAttribute="bottom" id="ubk-p8-36K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jxT-ul-Xl1"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="hGq-SD-UrZ" id="vTm-qh-TtV"/>
+                        <outlet property="empty" destination="4fQ-mO-FGU" id="4xW-Cl-8tF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5D-bi-xMj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -70,4 +78,7 @@
             <point key="canvasLocation" x="-165.21739130434784" y="190.84821428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="empty_yellow" width="400" height="400"/>
+    </resources>
 </document>

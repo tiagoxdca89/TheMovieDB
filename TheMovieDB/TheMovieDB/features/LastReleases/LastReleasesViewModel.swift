@@ -12,17 +12,21 @@ import RxCocoa
 
 protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
     var moviesCount: Int { get }
+    var emptyList: Driver<Bool> { get }
     var dataSource: Driver <[Movie]> { get }
     var selectedMovie: Driver<Movie> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
     var loadNextPage: PublishSubject<Void> { get set }
-    func viewWillAppear()
 }
 
 class LastReleasesViewModel: BaseViewModel {
     
     var moviesCount: Int {
         return movies.count
+    }
+    
+    var emptyList: Driver<Bool> {
+        return _emptyList.asDriver(onErrorJustReturn: true)
     }
     
     var dataSource: Driver<[Movie]> {
@@ -43,6 +47,7 @@ class LastReleasesViewModel: BaseViewModel {
     
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
     private var _selectedMovie = PublishSubject<Movie>()
+    private var _emptyList = PublishSubject<Bool>()
     private var movies: [Movie] = []
     private var isLoaging = false
     private var page: Int = 0
@@ -95,8 +100,10 @@ class LastReleasesViewModel: BaseViewModel {
                     self._dataSource.onNext(self.movies)
                     self.totalPages = result.totalPages
                     self.isLoaging = false
+                    self._emptyList.onNext(self.movies.count == 0)
                     }, onError: { [weak self] (error: Error) in
                         self?.presentError(error: error)
+                        self?._emptyList.onNext(self?.movies.count == 0)
                 }).disposed(by: bag)
         }
     }

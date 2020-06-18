@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol SearchViewModelProtocol: BaseViewModelProtocol {
+    var emptyList: Driver<Bool> { get }
     var dataSource: Driver <[Movie]> { get }
     var selectedMovie: Driver<Movie> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
@@ -29,6 +30,10 @@ class SearchViewModel: BaseViewModel {
         return movies.count
     }
     
+    var emptyList: Driver<Bool> {
+        return _emptyList.asDriver(onErrorJustReturn: false)
+    }
+    
     var dataSource: Driver<[Movie]> {
         return _dataSource.asDriver(onErrorJustReturn: [])
     }
@@ -40,6 +45,7 @@ class SearchViewModel: BaseViewModel {
     
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
     private var _selectedMovie = PublishSubject<Movie>()
+    private var _emptyList = PublishSubject<Bool>()
     private var movies: [Movie] = []
     private var isLoaging = false
     private var page: Int = 0
@@ -95,8 +101,10 @@ class SearchViewModel: BaseViewModel {
                     self.movies.append(contentsOf: result.movies)
                     self._dataSource.onNext(self.movies)
                     self.isLoaging = false
+                    self._emptyList.onNext(self.movies.count == 0)
                     }, onError: { [weak self] (error: Error) in
                         self?.presentError(error: error)
+                        self?._emptyList.onNext(self?.movies.count == 0)
                 })
                 .disposed(by: bag)
         }
