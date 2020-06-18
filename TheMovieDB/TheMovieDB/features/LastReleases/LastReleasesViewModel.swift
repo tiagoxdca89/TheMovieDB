@@ -22,7 +22,6 @@ protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
 class LastReleasesViewModel: BaseViewModel {
     
     var moviesCount: Int {
-//        let movies = (try? self._dataSource.value()) ?? []
         return movies.count
     }
     

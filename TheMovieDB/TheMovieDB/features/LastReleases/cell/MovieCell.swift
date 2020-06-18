@@ -12,10 +12,7 @@ import Kingfisher
 
 class MovieCell: UICollectionViewCell {
     
-    
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var btnDetails: UIButton!
-    
     
     static let reuseIdentifier = "MovieCell"
     var movie: Movie?
@@ -32,12 +29,4 @@ class MovieCell: UICollectionViewCell {
                 .cacheOriginalImage
             ])
     }
-    
-    
-    @IBAction func tapOnbutton(_ sender: UIButton) {
-        print("Show Details")
-    }
-    
-    
-    
 }

@@ -38,7 +38,8 @@ class LastReleasesViewController: UIViewController {
         guard let viewModel = viewModel else { return }
         
         viewModel.dataSource.asObservable()
-            .bind(to: self.collectionView.rx.items(cellIdentifier: MovieCell.reuseIdentifier, cellType: MovieCell.self)) { row, movie, cell in
+            .bind(to: self.collectionView.rx
+                .items(cellIdentifier: MovieCell.reuseIdentifier, cellType: MovieCell.self)) { row, movie, cell in
             cell.load(movie: movie)
         }.disposed(by: bag)
         

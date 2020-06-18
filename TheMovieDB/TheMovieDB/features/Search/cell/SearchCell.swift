@@ -16,18 +16,16 @@ class SearchCell: UITableViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var year: UILabel!
-    @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var rate: UILabel!
     
 
     func setupCell(movie: Movie) {
         title.text = movie.title
-        year.text = movie.release_date
-        duration.text = "\(movie.runtime)"
-        rate.text = "\(movie.vote_average)"
+        year.text = String(movie.release_date?.prefix(4) ?? "")
+        rate.text = "\(movie.vote_average ?? 0) | 10"
         setupImage(url: movie.getPosterEndPoint(), imageView: posterImageView)
         posterImageView.layer.borderWidth = 3
-        posterImageView.layer.borderColor = UIColor(named: "red")?.cgColor
+        posterImageView.layer.borderColor = UIColor(named: "gold")?.cgColor
     }
     
     private func setupImage(url: String, imageView: UIImageView) {

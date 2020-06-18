@@ -34,8 +34,8 @@ class TabBarCoordinator: NSObject, Coordinator {
         
         let searchNavigationController = UINavigationController()
         searchNavigationController.navigationBar.barTintColor = UIColor.black
-        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
-        searchNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
+        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+        searchNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
         searchNavigationController.navigationBar.prefersLargeTitles = true
         
         searchNavigationController.tabBarItem = UITabBarItem(

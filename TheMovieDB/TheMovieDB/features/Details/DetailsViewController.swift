@@ -86,7 +86,7 @@ extension DetailsViewController {
         setupImage(url: posterURL, imageView: poster)
         setupImage(url: backdrop, imageView: backdrop_img)
         lbl_title.text = movie.title
-        lbl_subtitle.text = movie.original_title
+        lbl_subtitle.text = "\(movie.original_title ?? "") (original title)"
         lbl_year.text = String(movie.release_date?.prefix(4) ?? "")
         let movieMinutes = minutesToHoursMinutes(minutes: movie.runtime ?? 0)
         lbl_duration.text = "\(movieMinutes.hours)h \(movieMinutes.leftMinutes)m"
@@ -102,9 +102,10 @@ extension DetailsViewController {
         guard let _genders = genders else { return "" }
         var genders_String = ""
         _genders.forEach {
-            genders_String.append("\($0.name ?? "") | ")
+            genders_String.append(" | \($0.name ?? "")")
         }
-        return genders_String
+        let gendersString = genders_String.deletingPrefix(" | ")
+        return gendersString
     }
     
     private func setupImage(url: String, imageView: UIImageView) {

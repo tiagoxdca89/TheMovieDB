@@ -23,7 +23,7 @@ class SearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "SEARCH A MOVIE"
+        navigationItem.title = "TOP RATED"
         setupTableView()
         setupSearchController()
         viewModel?.viewDidLoad()
