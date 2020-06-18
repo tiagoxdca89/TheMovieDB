@@ -11,6 +11,7 @@ target 'TheMovieDB' do
     pod 'RxCocoa'
     pod 'MBProgressHUD'
     pod 'Kingfisher', '~> 5.14'
+    pod 'lottie-ios'
     pod 'SwiftMessages'
 
   target 'TheMovieDBTests' do

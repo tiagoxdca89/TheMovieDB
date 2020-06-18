@@ -23,6 +23,8 @@ class MainCoordinator: Coordinator, MainFlow {
     func start() {
         guard let mainController = MainBuilder.buildViewController() else { return }
         mainController.coordinator = self
+        navigationController.navigationBar.barTintColor = UIColor.black
+        navigationController.navigationBar.isTranslucent = false
         navigationController.pushViewController(mainController, animated: true)
     }
 

@@ -7,27 +7,36 @@
 //
 
 import UIKit
+import Lottie
 
 class MainViewController: UIViewController {
+    
+    @IBOutlet weak var animationView: LottieView!
+    
+    
     
     var coordinator: MainFlow?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layoutIfNeeded()
-        showLoading(show: true)
+        startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showLoading(show: false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.coordinator?.coordinateToTabBar()
         }
     }
     
-    @IBAction func showTabBar(_ sender: Any) {
-        print("Clicou aqui")
-        
+    private func startAnimating() {
+        let checkMarkAnimation =  AnimationView(name: "animation")
+        animationView.contentMode = .scaleAspectFit
+        animationView.addSubview(checkMarkAnimation)
+        checkMarkAnimation.frame = animationView.bounds
+        checkMarkAnimation.loopMode = .playOnce
+        checkMarkAnimation.play()
     }
+    
 }
