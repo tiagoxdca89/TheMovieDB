@@ -30,7 +30,7 @@ class FavoriteCell: UITableViewCell {
         posterImageView.layer.cornerRadius = posterImageView.frame.size.width / 2
         posterImageView.clipsToBounds = true
         posterImageView.layer.borderWidth = 3
-        posterImageView.layer.borderColor = UIColor(named: "gold")?.cgColor
+        posterImageView.layer.borderColor = UIColor(named: "red")?.cgColor
     }
     
     private func setupImage(url: String, imageView: UIImageView) {
@@ -46,5 +46,4 @@ class FavoriteCell: UITableViewCell {
                 .cacheOriginalImage
             ])
     }
-
 }

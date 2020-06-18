@@ -47,8 +47,8 @@ class TabBarCoordinator: NSObject, Coordinator {
             tabBarSystemItem: .favorites, tag: 2)
         
         favoritesNavigationController.navigationBar.barTintColor = UIColor.black
-        favoritesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        favoritesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+        favoritesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
+        favoritesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "red") ?? .white]
         
         favoritesNavigationController.navigationBar.prefersLargeTitles = true
         
