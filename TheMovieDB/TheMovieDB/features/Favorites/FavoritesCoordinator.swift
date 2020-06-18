@@ -28,8 +28,12 @@ class FavoritesCoordinator: Coordinator, FavoriteFlow {
      }
     
     func coordinateToDetail(movie: Movie) {
+        if InternetManager.shared.isConnectedToInternet {
         guard let navigationController = navigationController else { return }
         let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
         coordinate(to: detailCoordinator)
+        } else {
+            debugPrint("Show No Internet message")
+        }
     }
 }

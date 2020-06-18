@@ -28,9 +28,13 @@ class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
      }
     
     func coordinateToDetail(movie: Movie) {
-        guard let navigationController = navigationController else { return }
-        let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
-        coordinate(to: detailCoordinator)
+        if InternetManager.shared.isConnectedToInternet {
+            guard let navigationController = navigationController else { return }
+            let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
+            coordinate(to: detailCoordinator)
+        } else {
+            debugPrint("Show No Internet message")
+        }
     }
 }
 

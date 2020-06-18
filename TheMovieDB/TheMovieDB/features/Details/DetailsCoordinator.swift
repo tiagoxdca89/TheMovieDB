@@ -23,7 +23,7 @@ class DetailsCoordinator: Coordinator {
      func start() {
         guard let detailViewController = DetailsBuilder.buildViewController(movie: movie) else { return }
         detailViewController.coordinator = self
-        navigationController?.modalPresentationStyle = .overCurrentContext
+        navigationController?.modalPresentationStyle = .automatic
         navigationController?.present(detailViewController, animated: true, completion: nil)
      }
 }
