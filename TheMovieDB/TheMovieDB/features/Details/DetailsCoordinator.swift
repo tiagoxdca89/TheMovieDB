@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 // MARK: - Class
 
@@ -26,4 +27,11 @@ class DetailsCoordinator: Coordinator {
         navigationController?.modalPresentationStyle = .automatic
         navigationController?.present(detailViewController, animated: true, completion: nil)
      }
+    
+    func openSafari(controller: UIViewController, urlString: String) {
+        if let url = URL(string: urlString) {
+            let safariVC = SFSafariViewController(url: url)
+            controller.present(safariVC, animated: true)
+        }
+    }
 }

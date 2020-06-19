@@ -59,8 +59,8 @@ class DetailsViewModel: BaseViewModel {
         movie.backdrop = backDrop
         favoriteUseCase.save(movie: movie)
             .asObservable()
-            .subscribe(onNext: { _ in
-                debugPrint("[SAVED]")
+            .subscribe(onNext: { [weak self] _ in
+                self?.presentSuccess(title: "The movie was saved!")
             }, onError: { [weak self] (error: Error) in
                 self?.presentError(error: error)
             })
@@ -81,11 +81,16 @@ class DetailsViewModel: BaseViewModel {
     }
     
     private func setupBindings() {
+        if movie.favorite ?? false {
+            _movieDetail.onNext(movie)
+            return
+        }
         detailUseCase.getDetailMovie(movie: movie)
             .subscribe(onSuccess: { [weak self] (movie) in
+                self?.movie.runtime = movie.runtime
                 self?._movieDetail.onNext(movie)
-            }, onError: { [weak self] (error: Error) in
-                self?.presentError(error: error)
+                }, onError: { [weak self] (error: Error) in
+                    self?.presentError(error: error)
             })
             .disposed(by: bag)
     }

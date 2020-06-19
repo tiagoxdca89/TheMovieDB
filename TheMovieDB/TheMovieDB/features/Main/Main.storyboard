@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,11 +23,23 @@
                                     <constraint firstAttribute="height" constant="400" id="m1j-Y2-IAC"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Movie DB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaN-qQ-cmg">
+                                <rect key="frame" x="16" y="146" width="382" height="52"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="40"/>
+                                <color key="textColor" name="gold"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="kDs-7C-YFL" firstAttribute="trailing" secondItem="uaN-qQ-cmg" secondAttribute="trailing" constant="16" id="88e-d1-m4S"/>
+                            <constraint firstItem="uaN-qQ-cmg" firstAttribute="leading" secondItem="kDs-7C-YFL" secondAttribute="leading" constant="16" id="BRF-wa-4sN"/>
                             <constraint firstItem="Jn8-uK-2aJ" firstAttribute="leading" secondItem="kDs-7C-YFL" secondAttribute="leading" constant="16" id="Dt1-8t-Gvq"/>
+                            <constraint firstItem="kDs-7C-YFL" firstAttribute="trailing" secondItem="uaN-qQ-cmg" secondAttribute="trailing" constant="16" id="Txo-Ca-fLA"/>
                             <constraint firstItem="kDs-7C-YFL" firstAttribute="trailing" secondItem="Jn8-uK-2aJ" secondAttribute="trailing" constant="16" id="UUx-GC-mcd"/>
+                            <constraint firstItem="Jn8-uK-2aJ" firstAttribute="top" secondItem="uaN-qQ-cmg" secondAttribute="bottom" constant="50" id="eAW-L0-JP9"/>
+                            <constraint firstItem="uaN-qQ-cmg" firstAttribute="leading" secondItem="kDs-7C-YFL" secondAttribute="leading" constant="16" id="ma3-K9-WQr"/>
+                            <constraint firstItem="uaN-qQ-cmg" firstAttribute="centerX" secondItem="6pI-9s-OdQ" secondAttribute="centerX" id="rqx-KJ-uQk"/>
                             <constraint firstItem="Jn8-uK-2aJ" firstAttribute="centerX" secondItem="6pI-9s-OdQ" secondAttribute="centerX" id="sIP-lp-JPC"/>
                             <constraint firstItem="Jn8-uK-2aJ" firstAttribute="centerY" secondItem="6pI-9s-OdQ" secondAttribute="centerY" id="yo6-L2-Ra5"/>
                         </constraints>
@@ -41,4 +54,9 @@
             <point key="canvasLocation" x="118.84057971014494" y="126.5625"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="gold">
+            <color red="1" green="0.6380000114440918" blue="0.0020000000949949026" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

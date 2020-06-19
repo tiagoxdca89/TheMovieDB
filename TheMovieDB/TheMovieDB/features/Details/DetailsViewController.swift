@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import Kingfisher
-import SafariServices
 
 class DetailsViewController: UIViewController {
     
@@ -29,15 +28,13 @@ class DetailsViewController: UIViewController {
         didSet { viewModel = oldValue ?? viewModel }
     }
     
-    
-    weak var coordinator: DetailsCoordinator?
+    var coordinator: DetailsCoordinator?
     let bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.viewDidLoad()
         setupBindings()
-        // Do any additional setup after loading the view.
+        viewModel?.viewDidLoad()
     }
     
     private func setupBindings() {
@@ -46,16 +43,12 @@ class DetailsViewController: UIViewController {
         viewModel.movieDetail.asObservable()
             .subscribe(onNext: { [weak self] (movie: Movie) in
                 self?.setupUI(movie: movie)
-                }, onError: { (error: Error) in
-                    debugPrint("[ERROR] = \(error.localizedDescription)")
-            }).disposed(by: bag)
+                }).disposed(by: bag)
         
         viewModel.trailerURLString.asObservable()
             .subscribe(onNext: { [weak self] urlString in
-                if let url = URL(string: urlString) {
-                    let safariVC = SFSafariViewController(url: url)
-                    self?.present(safariVC, animated: true)
-                }
+                guard let self = self else { return }
+                self.coordinator?.openSafari(controller: self, urlString: urlString)
             })
             .disposed(by: bag)
         
@@ -83,8 +76,8 @@ extension DetailsViewController {
         poster.layer.borderColor = UIColor(named: "gold")?.cgColor
         poster.layer.borderWidth = 2.0
         let backdrop = movie.getBackDropURL()
-        setupImage(url: posterURL, imageView: poster)
-        setupImage(url: backdrop, imageView: backdrop_img)
+        setupImage(movie: movie, url: posterURL, imageView: poster)
+        setupImage(movie: movie, url: backdrop, imageView: backdrop_img)
         lbl_title.text = movie.title
         lbl_subtitle.text = "\(movie.original_title ?? "") (original title)"
         lbl_year.text = String(movie.release_date?.prefix(4) ?? "")
@@ -108,11 +101,19 @@ extension DetailsViewController {
         return gendersString
     }
     
-    private func setupImage(url: String, imageView: UIImageView) {
+    private func setupImage(movie: Movie, url: String, imageView: UIImageView) {
+        
+        if let dataBackDrop = movie.backdrop, let posterData = movie.poster {
+            backdrop_img.image = UIImage(data: dataBackDrop)
+            poster.image = UIImage(data: posterData)
+            return
+        }
+        
         let processor = DownsamplingImageProcessor(size: poster.bounds.size)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: URL(string: url),
+            placeholder: UIImage(named: "placeholder"),
             options: [
                 .processor(processor),
                 .scaleFactor(poster.contentScaleFactor),
@@ -120,5 +121,4 @@ extension DetailsViewController {
                 .cacheOriginalImage
             ])
     }
-    
 }

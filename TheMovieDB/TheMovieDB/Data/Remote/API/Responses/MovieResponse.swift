@@ -31,6 +31,7 @@ struct Movie: Codable  {
     var runtime: Int?
     var poster: Data?
     var backdrop: Data?
+    var favorite: Bool?
     var genres: [GenreModel]?
     
     func getPosterEndPoint() -> String {

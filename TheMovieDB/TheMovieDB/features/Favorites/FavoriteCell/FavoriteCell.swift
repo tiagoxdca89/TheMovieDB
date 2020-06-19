@@ -38,6 +38,7 @@ class FavoriteCell: UITableViewCell {
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: URL(string: url),
+            placeholder: UIImage(named: "placeholder"),
             options: [
                 .processor(processor),
                 .scaleFactor(posterImageView.contentScaleFactor),

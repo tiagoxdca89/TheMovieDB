@@ -17,6 +17,7 @@ protocol BaseViewModelProtocol {
     func viewDidLoad()
     func viewWillAppear()
     func presentError(error: Error)
+    func presentSuccess(title: String)
 }
 
 // MARK: Class
@@ -32,5 +33,9 @@ class BaseViewModel: BaseViewModelProtocol {
 extension BaseViewModelProtocol {
     func presentError(error: Error) {
         MessageManager.shared.present(error: error)
+    }
+    
+    func presentSuccess(title: String) {
+        MessageManager.shared.presentSuccess(title: title)
     }
 }

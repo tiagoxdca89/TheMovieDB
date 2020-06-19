@@ -10,6 +10,10 @@ import UIKit
 import RxSwift
 import CoreData
 
+enum DataBaseError: Error {
+    case alreadyExists
+}
+
 protocol FavoritesRepositoryProtocol {
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     func save(movie: Movie) -> Single<Void>
@@ -47,7 +51,7 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
         let predicate: NSPredicate = NSPredicate(format: "id == %d", id)
         fetchRequest.predicate = predicate
         guard let result = try? coreDataManager.viewContext.fetch(fetchRequest),
-            result.count == 0 else { return .just(()) }
+            result.count == 0 else { return .error(DataBaseError.alreadyExists) }
         
         return Single<Void>.create { [weak self] (observer) -> Disposable in
             guard let self = self else { return Disposables.create() }
@@ -55,7 +59,9 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
             let favorite = FavoriteMovie(context: self.coreDataManager.viewContext)
             favorite.id = Int32(movie.id ?? 0)
             favorite.title = movie.title
+            favorite.original_title = movie.original_title
             favorite.overview = movie.overview
+            favorite.runtime = Int16(movie.runtime ?? 0)
             favorite.popularity = movie.popularity ?? 0.0
             favorite.vote_average = movie.vote_average ?? 0.0
             favorite.release_date = movie.release_date

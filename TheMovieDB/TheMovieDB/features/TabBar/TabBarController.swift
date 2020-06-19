@@ -22,6 +22,5 @@ class TabBarController: UITabBarController {
         tabBar.barTintColor = .black
         tabBar.isTranslucent = false
         tabBar.tintColor = .white
-        debugPrint("Did load TabBarController")
     }
 }

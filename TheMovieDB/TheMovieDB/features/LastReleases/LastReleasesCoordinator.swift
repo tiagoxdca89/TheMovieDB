@@ -33,7 +33,7 @@ class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
             let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
             coordinate(to: detailCoordinator)
         } else {
-            debugPrint("Show No Internet message")
+            MessageManager.shared.present(error: RemoteFetchError.noInternet)
         }
     }
 }

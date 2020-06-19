@@ -13,8 +13,6 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var animationView: LottieView!
     
-    
-    
     var coordinator: MainFlow?
 
     override func viewDidLoad() {

@@ -83,8 +83,8 @@ class SearchViewModel: BaseViewModel {
         .subscribe(onNext: { [weak self] index in
             guard let self = self else { return }
             self._selectedMovie.onNext(self.movies[index])
-        }, onError: { (error: Error) in
-            debugPrint("[Error] = \(error)")
+        }, onError: { [weak self] (error: Error) in
+            self?.presentError(error: error)
         })
         .disposed(by: bag)
     }
@@ -105,6 +105,7 @@ class SearchViewModel: BaseViewModel {
                     }, onError: { [weak self] (error: Error) in
                         self?.presentError(error: error)
                         self?._emptyList.onNext(self?.movies.count == 0)
+                        self?.isLoaging = false
                 })
                 .disposed(by: bag)
         }

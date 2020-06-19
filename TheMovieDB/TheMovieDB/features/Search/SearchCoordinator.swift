@@ -32,7 +32,7 @@ class SearchCoordinator: Coordinator, SearchFlow {
             let detailCoordinator = DetailsCoordinator(navigationController: navigationController, movie: movie)
             coordinate(to: detailCoordinator)
         } else {
-            debugPrint("No internet connection")
+            MessageManager.shared.present(error: RemoteFetchError.noInternet)
         }
     }
 }

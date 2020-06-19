@@ -15,50 +15,43 @@ class MessageManager {
     
     private init() {}
     
-    func show(title: String, body: String, imageName: String, colorName: String) {
+    func present(error: Error) {
+        if let remote = error as? RemoteFetchError, remote == .noInternet {
+           presentError(title: "NO INTERNET CONNECTION", subtitle: "Check your network settings and try again.", seconds: 5)
+            return
+        }
         
-        var config = SwiftMessages.Config()
-
-        config.presentationStyle = .center
-        config.presentationContext = .window(windowLevel: .normal)
-        config.duration = .forever
-        config.dimMode = .gray(interactive: true)
-        config.interactiveHide = false
+        if let dataBase = error as? DataBaseError, dataBase == .alreadyExists {
+            presentError(title: "Error", subtitle: "The movie is already in your favorite list.", seconds: 2)
+            return
+        }
         
-        
-        
-        let view = MessageView.viewFromNib(layout: .centeredView)
-        view.configureTheme(.info)
-
-        // Add a drop shadow.
-        view.configureDropShadow()
-        view.configureContent(title: title, body: body)
-        view.iconImageView?.image = UIImage(named: imageName)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        presentError(title: "ERROR", subtitle: "Something went wrong !", seconds: 5)
+    }
+    
+    private func presentError(title: String, subtitle: String, seconds: TimeInterval) {
+        let config = getConfig(seconds: seconds)
+        let view = MessageView.viewFromNib(layout: .messageView)
+        view.configureContent(title: title, body: subtitle)
         view.button?.isHidden = true
-        view.backgroundColor = UIColor(named: "gold")
-
+        view.configureTheme(.error)
         SwiftMessages.show(config: config, view: view)
     }
     
-    func present(error: Error) {
-        var config = SwiftMessages.Config()
-
-        config.presentationStyle = .center
-        config.duration = .forever
-        config.dimMode = .gray(interactive: true)
-        config.interactiveHide = false
-        
-        let view = MessageView.viewFromNib(layout: .centeredView)
-        view.configureDropShadow()
-        view.configureContent(title: "NO INTERNET ", body: "")
-        view.iconImageView?.image = UIImage(named: "no_internet")
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        view.bodyLabel?.isHidden = true
+    func presentSuccess(title: String) {
+        let config = getConfig(seconds: 2)
+        let view = MessageView.viewFromNib(layout: .messageView)
+        view.configureContent(title: "SUCCESS", body: title)
         view.button?.isHidden = true
-        view.iconLabel?.isHidden = true
-        view.backgroundColor = UIColor(named: "red")
-
+        view.configureTheme(.success)
         SwiftMessages.show(config: config, view: view)
+    }
+    
+    private func getConfig(seconds: TimeInterval) -> SwiftMessages.Config {
+        var config = SwiftMessages.Config()
+        config.presentationContext = .window(windowLevel: .statusBar)
+        config.duration = .seconds(seconds: seconds)
+        config.interactiveHide = false
+        return config
     }
 }

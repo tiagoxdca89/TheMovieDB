@@ -23,6 +23,7 @@ class MovieCell: UICollectionViewCell {
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: URL(string: stringURL),
+            placeholder: UIImage(named: "placeholder"),
             options: [
                 .scaleFactor(imageView.contentScaleFactor),
                 .transition(.fade(0.5)),

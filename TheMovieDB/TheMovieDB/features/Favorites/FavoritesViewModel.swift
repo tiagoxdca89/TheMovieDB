@@ -34,8 +34,8 @@ class FavoritesViewModel: BaseViewModel {
             .asObservable()
             .subscribe(onNext: { _ in
                 print("Movie deleted")
-                }, onError: { (error: Error) in
-                    debugPrint("\(error.localizedDescription)")
+            }, onError: { [weak self] (error: Error) in
+                self?.presentError(error: error)
             })
             .disposed(by: bag)
     }
@@ -45,7 +45,8 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
     
     func convertMovie(favorite: FavoriteMovie?) -> Movie {
         guard let favorite = favorite else { return Movie() }
-        return Movie(id: Int(favorite.id), title: favorite.title, original_title: favorite.original_title, homepage: favorite.homepage, poster_path: favorite.poster_path, backdrop_path: favorite.backdrop_path, overview: favorite.overview, release_date: favorite.release_date, popularity: favorite.popularity, vote_average: favorite.vote_average, vote_count: Int(favorite.vote_count), video: false, runtime: Int(favorite.runtime), genres: convertGenders(genders: favorite.genres?.allObjects as? [Genre] ))
+        
+        return Movie(id: Int(favorite.id), title: favorite.title, original_title: favorite.original_title, homepage: favorite.homepage, poster_path: favorite.poster_path, backdrop_path: favorite.backdrop_path, overview: favorite.overview, release_date: favorite.release_date, popularity: favorite.popularity, vote_average: favorite.vote_average, vote_count: Int(favorite.vote_count), video: false, runtime: Int(favorite.runtime), poster: ((favorite.poster) as? UIImage)?.pngData(), backdrop: ((favorite.backdrop) as? UIImage)?.pngData(), favorite: true, genres: convertGenders(genders: favorite.genres?.allObjects as? [Genre]))
     }
     
     private func convertGenders(genders: [Genre]?) -> [GenreModel] {
