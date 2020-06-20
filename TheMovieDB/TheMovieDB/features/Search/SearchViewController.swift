@@ -29,7 +29,7 @@ class SearchViewController: UITableViewController {
         setupSearchController()
         viewModel?.viewDidLoad()
         setupBinding()
-        
+        showLoading(show: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +43,7 @@ class SearchViewController: UITableViewController {
         viewModel.emptyList.asObservable()
         .subscribe(onNext: { [weak self] (empty) in
             self?.imageEmpty?.isHidden = !empty
+            self?.showLoading(show: false)
         })
         .disposed(by: bag)
         
@@ -52,6 +53,7 @@ class SearchViewController: UITableViewController {
             .bind(to: tableView.rx.items(cellIdentifier: SearchCell.reuseIdentifier,
                        cellType: SearchCell.self), curriedArgument: { (row, movie, cell) in
                         cell.setupCell(movie: movie)
+                        self.showLoading(show: false)
         })
         .disposed(by: bag)
         
@@ -64,12 +66,6 @@ class SearchViewController: UITableViewController {
         viewModel.selectedMovie.asObservable()
             .subscribe(onNext: { [weak self] (movie) in
                 self?.coordinator?.coordinateToDetail(movie: movie)
-            })
-            .disposed(by: bag)
-        
-        viewModel.selectedIndexPath
-            .subscribe(onNext: { [weak self] (indexPath) in
-                self?.tableView.deselectRow(at: indexPath, animated: false)
             })
             .disposed(by: bag)
     }

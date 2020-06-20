@@ -87,7 +87,7 @@ extension DetailsViewController {
         votes.text = "\(movie.vote_average ?? 0.0) / 10"
         categories.text = getGenders(genders: movie.genres)
         
-        btn_addFavorites.layer.cornerRadius = 5
+        btn_addFavorites.layer.cornerRadius = 10
         btn_addFavorites.titleLabel?.font = .boldSystemFont(ofSize: 18)
     }
     
@@ -102,13 +102,11 @@ extension DetailsViewController {
     }
     
     private func setupImage(movie: Movie, url: String, imageView: UIImageView) {
-        
         if let dataBackDrop = movie.backdrop, let posterData = movie.poster {
             backdrop_img.image = UIImage(data: dataBackDrop)
             poster.image = UIImage(data: posterData)
             return
         }
-        
         let processor = DownsamplingImageProcessor(size: poster.bounds.size)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(

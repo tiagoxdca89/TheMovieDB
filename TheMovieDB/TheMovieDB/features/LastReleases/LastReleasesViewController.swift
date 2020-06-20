@@ -27,10 +27,12 @@ class LastReleasesViewController: UIViewController {
         navigationItem.title = "LAST RELEASES"
         viewModel?.viewDidLoad()
         setupBinding()
+        showLoading(show: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         viewModel?.viewWillAppear()
     }
     
@@ -40,6 +42,7 @@ class LastReleasesViewController: UIViewController {
         viewModel.emptyList.asObservable()
             .subscribe(onNext: { [weak self] (empty) in
                 self?.empty.isHidden = !empty
+                self?.showLoading(show: false)
             })
             .disposed(by: bag)
         
@@ -48,6 +51,7 @@ class LastReleasesViewController: UIViewController {
                 .items(cellIdentifier: MovieCell.reuseIdentifier,
                        cellType: MovieCell.self)) { row, movie, cell in
             cell.load(movie: movie)
+            self.showLoading(show: false)
         }.disposed(by: bag)
         
         collectionView.rx.setDelegate(self).disposed(by: bag)

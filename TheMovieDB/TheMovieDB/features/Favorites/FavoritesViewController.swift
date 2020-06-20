@@ -56,6 +56,16 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let movie = viewModel?.convertMovie(favorite: favoriteMovie) else { return }
         coordinator?.coordinateToDetail(movie: movie)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let rotationAngleInRadians = 90.0 * CGFloat(Double.pi/180)
+        let rotationTransform = CATransform3DMakeRotation(rotationAngleInRadians, 0, 0, 1)
+        cell.layer.transform = rotationTransform
+        
+        UIView.animate(withDuration: 0.5) {
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
