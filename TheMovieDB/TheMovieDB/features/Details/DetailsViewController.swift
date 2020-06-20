@@ -33,6 +33,7 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoading(show: true)
         setupBindings()
         viewModel?.viewDidLoad()
     }
@@ -105,6 +106,7 @@ extension DetailsViewController {
         if let dataBackDrop = movie.backdrop, let posterData = movie.poster {
             backdrop_img.image = UIImage(data: dataBackDrop)
             poster.image = UIImage(data: posterData)
+            showLoading(show: false)
             return
         }
         let processor = DownsamplingImageProcessor(size: poster.bounds.size)
@@ -118,5 +120,6 @@ extension DetailsViewController {
                 .transition(.fade(0.5)),
                 .cacheOriginalImage
             ])
+        showLoading(show: false)
     }
 }
