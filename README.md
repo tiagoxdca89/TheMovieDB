@@ -1,5 +1,11 @@
 # TheMovieDB
 The MovieDB is an application where users can see an search for movies. It also allow the user to save its favorite movies.
+
+# ScreenShots
+![Favorites](https://github.com/tiagoxdca89/TheMovieDB/blob/feature/MO-1/images/topRated.PNG)
+![Last Releases](https://github.com/tiagoxdca89/TheMovieDB/blob/feature/MO-1/images/lastReleases.PNG)
+![Movie Details](https://github.com/tiagoxdca89/TheMovieDB/blob/feature/MO-1/images/movieDetails.PNG)
+![Top Rated](https://github.com/tiagoxdca89/TheMovieDB/blob/feature/MO-1/images/topRated.PNG)
 	
 ## Features
 * Get **Last Releases** movies
