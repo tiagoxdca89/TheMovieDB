@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+// MARK: Protocol
+
 protocol SearchViewModelProtocol: BaseViewModelProtocol {
     var emptyList: Driver<Bool> { get }
     var dataSource: Driver <[Movie]> { get }
@@ -21,10 +23,11 @@ protocol SearchViewModelProtocol: BaseViewModelProtocol {
     var moviesCount: Int { get }
 }
 
+// MARK: - Class
+
 class SearchViewModel: BaseViewModel {
     
-    let searchUseCase: SearchMoviesUseCaseProtocol
-    let topRatedUseCase: TopRatedUseCaseProtocol
+    // MARK: - Public properties
     
     var moviesCount: Int {
         return movies.count
@@ -43,6 +46,10 @@ class SearchViewModel: BaseViewModel {
     var selectedIndexPath = PublishSubject<IndexPath>()
     var loadNextPage = PublishSubject<Void>()
     
+    // MARK: - Private properties
+    
+    private let searchUseCase: SearchMoviesUseCaseProtocol
+    private let topRatedUseCase: TopRatedUseCaseProtocol
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
     private var _selectedMovie = PublishSubject<Movie>()
     private var _emptyList = PublishSubject<Bool>()
@@ -51,12 +58,15 @@ class SearchViewModel: BaseViewModel {
     private var page: Int = 0
     private var totalPages = 500
     
+    // MARK: - Initialization
     
     init(searchUseCase: SearchMoviesUseCaseProtocol,
          topRatedUseCase: TopRatedUseCaseProtocol) {
         self.searchUseCase = searchUseCase
         self.topRatedUseCase = topRatedUseCase
     }
+    
+    // MARK: - Overridden methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,31 +78,33 @@ class SearchViewModel: BaseViewModel {
         getTopRated()
     }
     
+    // MARK: - Private methods
+    
     private func setupBinding() {
         
         loadNextPage.asObservable()
-        .subscribe(onNext: { [weak self] _ in
-            self?.getTopRated()
-        }, onError: { [weak self] (error: Error) in
-            self?.presentError(error: error)
-        })
-        .disposed(by: bag)
-        
+            .subscribe(onNext: { [weak self] _ in
+                self?.getTopRated()
+                }, onError: { [weak self] (error: Error) in
+                    self?.presentError(error: error)
+            })
+            .disposed(by: bag)
         
         selectedIndexPath.map { $0.row }
-        .subscribe(onNext: { [weak self] index in
-            guard let self = self else { return }
-            self._selectedMovie.onNext(self.movies[index])
-        }, onError: { [weak self] (error: Error) in
-            self?.presentError(error: error)
-        })
-        .disposed(by: bag)
+            .subscribe(onNext: { [weak self] index in
+                guard let self = self else { return }
+                self._selectedMovie.onNext(self.movies[index])
+                }, onError: { [weak self] (error: Error) in
+                    self?.presentError(error: error)
+            })
+            .disposed(by: bag)
     }
+    
+    // MARK: - Public methods
     
     func getTopRated() {
         let canRequest = moviesCount != totalPages && page <= totalPages && !isLoaging
         page += 1
-        
         if canRequest {
             isLoaging = true
             topRatedUseCase.getTopRated(page: page).asObservable()

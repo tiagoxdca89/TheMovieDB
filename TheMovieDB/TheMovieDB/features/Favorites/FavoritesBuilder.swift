@@ -21,6 +21,8 @@ struct FavoritesBuilder {
         return controller
     }
     
+    // MARK: Private methods
+    
     private static func buildViewModel() -> FavoritesViewModelProtocol {
         let favoritesUseCase = buildFavoritesUseCase()
         return FavoritesViewModel(favoritesUseCase: favoritesUseCase)

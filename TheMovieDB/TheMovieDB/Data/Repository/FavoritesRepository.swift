@@ -10,9 +10,13 @@ import UIKit
 import RxSwift
 import CoreData
 
+// MARK: - Enum
+
 enum DataBaseError: Error {
     case alreadyExists
 }
+
+// MARK: Protocol
 
 protocol FavoritesRepositoryProtocol {
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
@@ -21,10 +25,16 @@ protocol FavoritesRepositoryProtocol {
     func getFavorites() -> Single<[FavoriteMovie]>
 }
 
+// MARK: Class
+
 class FavoritesRepository: FavoritesRepositoryProtocol {
     
-    let coreDataManager: CoreDataManager
+    // MARK: Properties
+    
+    private let coreDataManager: CoreDataManager
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie>
+    
+    // MARK: - Initialization
     
     init(coreDataManager: CoreDataManager, fetchedResultsController: NSFetchedResultsController<FavoriteMovie>) {
         self.coreDataManager = coreDataManager
@@ -32,11 +42,12 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
         setupFetchedResultsController()
     }
     
+    // MARK: - Private methods
+    
     private func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataManager.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         do {
             try fetchedResultsController.performFetch()
@@ -44,6 +55,8 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: - Public methods
     
     func save(movie: Movie) -> Single<Void> {
         guard let id = movie.id else { return .just(())}
@@ -98,6 +111,8 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
         
         return Single.just(movies)
     }
+    
+    // MARK: - Private methods
     
     private func getGenders(models: [GenreModel]) -> NSSet {
         var genres: [Genre] = []

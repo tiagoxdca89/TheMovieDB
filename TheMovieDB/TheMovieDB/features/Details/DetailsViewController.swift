@@ -10,7 +10,11 @@ import UIKit
 import RxSwift
 import Kingfisher
 
+// MARK: - Class
+
 class DetailsViewController: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var backdrop_img: UIImageView!
     @IBOutlet weak var btnPlay: UIButton!
@@ -24,19 +28,27 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var votes: UILabel!
     @IBOutlet weak var btn_addFavorites: UIButton!
     
+    // MARK: - Public properties
+    
     var viewModel: DetailsViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
-    
     var coordinator: DetailsCoordinator?
-    let bag = DisposeBag()
+    
+    // MARK: - Private Properties
+    
+    private let bag = DisposeBag()
 
+    // MARK: - Overriden methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading(show: true)
         setupBindings()
         viewModel?.viewDidLoad()
     }
+    
+    // MARK: - Private methods
     
     private func setupBindings() {
         guard let viewModel = viewModel else { return }
@@ -72,7 +84,10 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController {
     
-    fileprivate func setupUI(movie: Movie) {
+    // MARK: - Private methods (extensions)
+    
+    private func setupUI(movie: Movie) {
+        
         let posterURL = movie.getPosterEndPoint()
         poster.layer.borderColor = UIColor(named: "gold")?.cgColor
         poster.layer.borderWidth = 2.0

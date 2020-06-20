@@ -9,15 +9,27 @@
 import UIKit
 import Lottie
 
+// MARK: - Class
+
 class MainViewController: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var animationView: LottieView!
+    @IBOutlet weak var appTitle: UILabel!
     
     var coordinator: MainFlow?
 
+    // MARK: - Overriden methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startAnimating()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        appTitle.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,6 +40,8 @@ class MainViewController: UIViewController {
         }
     }
     
+    // MARK: - Private methods
+    
     private func startAnimating() {
         let checkMarkAnimation =  AnimationView(name: "animation")
         animationView.contentMode = .scaleAspectFit
@@ -36,5 +50,4 @@ class MainViewController: UIViewController {
         checkMarkAnimation.loopMode = .playOnce
         checkMarkAnimation.play()
     }
-    
 }

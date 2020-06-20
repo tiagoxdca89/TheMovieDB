@@ -24,11 +24,18 @@ protocol BaseViewModelProtocol {
 
 class BaseViewModel: BaseViewModelProtocol {
     
+    // MARK: Public properties
+    
     var bag: DisposeBag = DisposeBag()
+    
+    // MARK: Public methods
+    
     func viewDidLoad() {}
     func viewWillAppear() {}
     
 }
+
+//MARK: Extension
 
 extension BaseViewModelProtocol {
     func presentError(error: Error) {

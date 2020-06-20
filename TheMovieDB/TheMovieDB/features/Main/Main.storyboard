@@ -47,6 +47,7 @@
                     </view>
                     <connections>
                         <outlet property="animationView" destination="Jn8-uK-2aJ" id="9E0-Gq-3FF"/>
+                        <outlet property="appTitle" destination="uaN-qQ-cmg" id="ldK-9t-rxa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XlM-lU-U4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

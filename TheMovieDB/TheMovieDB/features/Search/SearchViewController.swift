@@ -11,15 +11,20 @@ import RxSwift
 
 class SearchViewController: UITableViewController {
     
-    let searchController = UISearchController(searchResultsController: nil)
+    // MARK: - Private Properties
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var imageEmpty: UIImageView?
+    private let bag = DisposeBag()
+    
+    // MARK: - Public Properties
     
     var viewModel: SearchViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
-    
-    var imageEmpty: UIImageView?
     var coordinator: SearchCoordinator?
-    let bag = DisposeBag()
+    
+    // MARK: - Overriden methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +41,8 @@ class SearchViewController: UITableViewController {
         super.viewWillAppear(animated)
         viewModel?.viewWillAppear()
     }
+    
+    // MARK: - Private methods
     
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
@@ -93,7 +100,10 @@ class SearchViewController: UITableViewController {
 
 }
 
+    // MARK: - UISearchResultsUpdating, UISearchBarDelegate methods
+
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    
     func updateSearchResults(for searchController: UISearchController) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -9,13 +9,19 @@
 import Foundation
 import RxSwift
 
+// MARK: Protocol
+
 protocol TopRatedUseCaseProtocol {
     func getTopRated(page: Int) -> Single<MoviesResult>
 }
 
+// MARK: Class
+
 class TopRatedUseCase: TopRatedUseCaseProtocol {
     
     private let remoteDataSource: TopRatedRemoteDataSourceProtocol
+    
+    // MARK: - Initialization
     
     init(remoteDataSource: TopRatedRemoteDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource

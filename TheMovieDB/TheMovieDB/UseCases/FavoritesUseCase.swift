@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 import RxSwift
 
+// MARK: Protocol
+
 protocol FavoritesUseCaseProtocol {
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     func getFavorites() -> Single<[FavoriteMovie]>
@@ -17,13 +19,17 @@ protocol FavoritesUseCaseProtocol {
     func deleteMovieAt(indexPath: IndexPath) -> Single<Void>
 }
 
+// MARK: Class
+
 class FavoritesUseCase: FavoritesUseCaseProtocol {
+    
+    private let repository: FavoritesRepositoryProtocol
     
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> {
         return repository.fetchedResultsController
     }
     
-    private let repository: FavoritesRepositoryProtocol
+    // MARK: - Initialization
     
     init(repository: FavoritesRepositoryProtocol) {
         self.repository = repository

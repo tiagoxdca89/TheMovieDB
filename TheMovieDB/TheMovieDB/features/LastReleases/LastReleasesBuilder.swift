@@ -22,6 +22,7 @@ struct LastReleasesBuilder {
         return controller
     }
     
+    // MARK: Private methods
     
     private static func buildViewModel() -> LastReleasesViewModelProtocol {
         let useCase = buildLastReleasesUseCase()

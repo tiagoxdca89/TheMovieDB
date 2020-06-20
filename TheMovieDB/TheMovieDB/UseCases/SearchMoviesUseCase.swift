@@ -9,13 +9,19 @@
 import Foundation
 import RxSwift
 
+// MARK: Protocol
+
 protocol SearchMoviesUseCaseProtocol {
     func getMovies(_ title: String) -> Single<[Movie]>
 }
 
+// MARK: Class
+
 class SearchMoviesUseCase: SearchMoviesUseCaseProtocol {
     
     private let remoteDataSource: MovieRemoteDataSourceProtocol
+    
+    // MARK: - Initialization
     
     init(remoteDataSource: MovieRemoteDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource

@@ -9,18 +9,27 @@
 import UIKit
 import RxSwift
 
+// MARK: - Class
+
 class LastReleasesViewController: UIViewController {
     
+    // MARK: - Outlets
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var empty: UIImageView!
     
+    // MARK: - Public properties
+    
     var viewModel: LastReleasesViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
-    
     var coordinator: LastReleasesCoordinator?
-    let bag = DisposeBag()
+    
+    // MARK: - Private properties
+    
+    private let bag = DisposeBag()
+    
+    // MARK: - Overriden methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +44,8 @@ class LastReleasesViewController: UIViewController {
         
         viewModel?.viewWillAppear()
     }
+    
+    // MARK: - Private methods
     
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
@@ -70,6 +81,8 @@ class LastReleasesViewController: UIViewController {
         
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension LastReleasesViewController: UICollectionViewDelegateFlowLayout {
     

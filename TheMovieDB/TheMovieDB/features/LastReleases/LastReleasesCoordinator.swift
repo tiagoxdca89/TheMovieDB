@@ -8,24 +8,34 @@
 
 import UIKit
 
+// MARK: - Protocol
+
 protocol LastReleasesFlow: class {
     func coordinateToDetail(movie: Movie)
 }
 
+// MARK: - Class
+
 class LastReleasesCoordinator: Coordinator, LastReleasesFlow {
     
+    // MARK: - Public Properties
+    
     weak var navigationController: UINavigationController?
+    
+    // MARK: - Initialization
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-     func start() {
-         guard let lastReleasesController = LastReleasesBuilder.buildViewController()
+    //MARK: - Public methods
+    
+    func start() {
+        guard let lastReleasesController = LastReleasesBuilder.buildViewController()
             else { return }
-         lastReleasesController.coordinator = self
-         navigationController?.pushViewController(lastReleasesController, animated: false)
-     }
+        lastReleasesController.coordinator = self
+        navigationController?.pushViewController(lastReleasesController, animated: false)
+    }
     
     func coordinateToDetail(movie: Movie) {
         if InternetManager.shared.isConnectedToInternet {

@@ -11,13 +11,19 @@ import RxSwift
 
 typealias MoviesResult = (movies: [Movie], page: Int, totalPages: Int)
 
+// MARK: Protocol
+
 protocol LastReleasesUseCaseProtocol {
     func getLastReleases(page: Int) -> Single<MoviesResult>
 }
 
+// MARK: Class
+
 class LastReleasesUseCase: LastReleasesUseCaseProtocol {
     
     private let remoteDataSource: LastReleasesRemoteDataSourceProtocol
+    
+    // MARK: - Initialization
     
     init(remoteDataSource: LastReleasesRemoteDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource

@@ -23,10 +23,16 @@ protocol DetailsViewModelProtocol: BaseViewModelProtocol {
 
 class DetailsViewModel: BaseViewModel {
     
-    var movie: Movie
-    let detailUseCase: DetailUseCaseProtocol
-    let favoriteUseCase: FavoritesUseCaseProtocol
-    let trailerUseCase: TrailerUseCaseProtocol
+    // MARK: - Private properties
+    
+    private var movie: Movie
+    private let detailUseCase: DetailUseCaseProtocol
+    private let favoriteUseCase: FavoritesUseCaseProtocol
+    private let trailerUseCase: TrailerUseCaseProtocol
+    private let _movieDetail = PublishSubject<Movie>()
+    private let _trailerURLString = PublishSubject<String>()
+    
+    // MARK: - Public properties
     
     var movieDetail: Driver<Movie> {
         return _movieDetail.asDriver(onErrorJustReturn: Movie())
@@ -36,8 +42,7 @@ class DetailsViewModel: BaseViewModel {
         return _trailerURLString.asDriver(onErrorJustReturn: "")
     }
     
-    private let _movieDetail = PublishSubject<Movie>()
-    private let _trailerURLString = PublishSubject<String>()
+    // MARK: - Initialization
     
     init(movie: Movie,
          useCase: DetailUseCaseProtocol,
@@ -49,10 +54,14 @@ class DetailsViewModel: BaseViewModel {
         self.trailerUseCase = trailerUseCase
     }
     
+    // MARK: - Overridden methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
     }
+    
+    // MARK: - Public methods
     
     func saveToFavorites(poster: Data?, backDrop: Data?) {
         movie.poster = poster
@@ -79,6 +88,8 @@ class DetailsViewModel: BaseViewModel {
             })
             .disposed(by: bag)
     }
+    
+    // MARK: - Private methods
     
     private func setupBindings() {
         if movie.favorite ?? false {

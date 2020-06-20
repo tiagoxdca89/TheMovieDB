@@ -9,16 +9,23 @@
 import UIKit
 import CoreData
 
+// MARK: - Class
+
 class FavoritesViewController: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyImage: UIImageView!
     
+    // MARK: - Public properties
+    
     var viewModel: FavoritesViewModelProtocol? {
         didSet { viewModel = oldValue ?? viewModel }
     }
-    
     var coordinator: FavoritesCoordinator?
+    
+    // MARK: - Overriden methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +39,14 @@ class FavoritesViewController: UIViewController {
         showEmptyListPopup()
     }
     
+    // MARK: - Private methods
+    
     private func showEmptyListPopup() {
         emptyImage.isHidden = viewModel?.fetchedResultsController.fetchedObjects?.count == 0 ? false : true
     }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource methods
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -80,6 +91,8 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         return 180
     }
 }
+
+// MARK: - NSFetchedResultsControllerDelegate methods
 
 extension FavoritesViewController: NSFetchedResultsControllerDelegate {
     

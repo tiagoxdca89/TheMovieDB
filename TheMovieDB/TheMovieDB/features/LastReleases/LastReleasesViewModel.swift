@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+// MARK: Protocol
+
 protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
     var moviesCount: Int { get }
     var emptyList: Driver<Bool> { get }
@@ -19,7 +21,11 @@ protocol LastReleasesViewModelProtocol: BaseViewModelProtocol {
     var loadNextPage: PublishSubject<Void> { get set }
 }
 
+// MARK: - Class
+
 class LastReleasesViewModel: BaseViewModel {
+    
+    // MARK: - Public properties
     
     var moviesCount: Int {
         return movies.count
@@ -53,9 +59,13 @@ class LastReleasesViewModel: BaseViewModel {
     private var page: Int = 0
     private var totalPages = 500
     
+    // MARK: - Initialization
+    
     init(useCase: LastReleasesUseCaseProtocol) {
         self.lastReleasesUseCase = useCase
     }
+    
+    // MARK: - Overridden methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +76,8 @@ class LastReleasesViewModel: BaseViewModel {
         super.viewWillAppear()
         getLastReleases()
     }
+    
+    // MARK: - Private methods
     
     private func setupBindings() {
         

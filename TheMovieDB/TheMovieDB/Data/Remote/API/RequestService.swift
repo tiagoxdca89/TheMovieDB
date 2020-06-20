@@ -10,19 +10,29 @@ import Foundation
 import Alamofire
 import RxSwift
 
+// MARK: Protocol
+
 protocol RequestServiceProtocol {
     func request<T: Decodable>(_ urlConvertible: URLRequestConvertible) -> Single<T>
 }
 
+// MARK: - Class
+
 class RequestService: RequestServiceProtocol {
     
-    static let shared = RequestService()
+    // MARK: - Private properties
+    
     private var sessionManager: Session = .default
+    
+    // MARK: - Public properties
+    
+    static let shared = RequestService()
     
     static var isConnectedToInternet: Bool {
         return NetworkReachabilityManager()?.isReachable ?? false
     }
     
+    // MARK: - Public methods
     
     func request<T: Decodable>(_ urlConvertible: URLRequestConvertible) -> Single<T> {
         return Single<T>.create { [weak self] (observer) -> Disposable in

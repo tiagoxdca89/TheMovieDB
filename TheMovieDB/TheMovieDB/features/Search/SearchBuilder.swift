@@ -22,6 +22,8 @@ struct SearchBuilder {
         return controller
     }
     
+    // MARK: Private methods
+    
     private static func buildViewModel() -> SearchViewModelProtocol {
         let topRatedUseCase = buildTopRatedUseCase()
         let searchUseCase = buildSearchUseCase()

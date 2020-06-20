@@ -381,8 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				0FE223A32493E57E0014B3D6 /* SearchCell */,
-				0F5999D32490DBA5001A4027 /* SearchViewController.swift */,
 				0F5999D52490DBCE001A4027 /* Search.storyboard */,
+				0F5999D32490DBA5001A4027 /* SearchViewController.swift */,
 				0F5999D72490DC52001A4027 /* SearchViewModel.swift */,
 				0F5999D92490DC63001A4027 /* SearchBuilder.swift */,
 				0F5999DB2490DCAB001A4027 /* SearchCoordinator.swift */,

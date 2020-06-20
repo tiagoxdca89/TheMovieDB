@@ -12,50 +12,34 @@ import UIKit
 
 class TabBarCoordinator: NSObject, Coordinator {
     
+    // MARK: - Public Properties
+    
     let navigationController: UINavigationController
+    
+    // MARK: - Initialization
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
+    //MARK: - Public methods
+    
     func start() {
         let tabBarController = TabBarController()
         tabBarController.coordinator = self
         
-        let releasesNavigationController = UINavigationController()
-        releasesNavigationController.navigationBar.barTintColor = UIColor.black
-        releasesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        releasesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        releasesNavigationController.navigationBar.isTranslucent = false
-        releasesNavigationController.navigationBar.prefersLargeTitles = true
-        releasesNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
-        let releasesCoordinator = LastReleasesCoordinator(navigationController: releasesNavigationController)
+        let releasesNavigation = setupNavigationController(item: .mostRecent, tag: 0)
+        let releasesCoordinator = LastReleasesCoordinator(navigationController: releasesNavigation)
         
-        let searchNavigationController = UINavigationController()
-        searchNavigationController.navigationBar.prefersLargeTitles = true
-        searchNavigationController.navigationBar.isTranslucent = false
-        searchNavigationController.navigationBar.barTintColor = UIColor.black
-        searchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        searchNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        searchNavigationController.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .search, tag: 1)
-        let searchCoordinator = SearchCoordinator(navigationController: searchNavigationController)
+        let searchNavigation = setupNavigationController(item: .search, tag: 1)
+        let searchCoordinator = SearchCoordinator(navigationController: searchNavigation)
         
-        let favoritesNavigationController = UINavigationController()
-        favoritesNavigationController.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .favorites, tag: 2)
-        favoritesNavigationController.navigationBar.prefersLargeTitles = true
-        favoritesNavigationController.navigationBar.isTranslucent = false
-        favoritesNavigationController.navigationBar.barTintColor = UIColor.black
-        favoritesNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
-        favoritesNavigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+        let favoritesNavigation = setupNavigationController(item: .favorites, tag: 2)
+        let favoritesCoordinator = FavoritesCoordinator(navigationController: favoritesNavigation)
         
-        let favoritesCoordinator = FavoritesCoordinator(navigationController: favoritesNavigationController)
-        
-        tabBarController.viewControllers = [releasesNavigationController,
-                                            searchNavigationController,
-                                            favoritesNavigationController]
-        
+        tabBarController.viewControllers = [releasesNavigation,
+                                            searchNavigation,
+                                            favoritesNavigation]
         tabBarController.modalPresentationStyle = .fullScreen
         
         navigationController.present(tabBarController, animated: true, completion: nil)
@@ -64,6 +48,16 @@ class TabBarCoordinator: NSObject, Coordinator {
         coordinate(to: favoritesCoordinator)
     }
     
+    //MARK: - Private methods
+    
+    private func setupNavigationController(item: UITabBarItem.SystemItem, tag: Int) -> UINavigationController {
+            let navigationController = UINavigationController()
+            navigationController.navigationBar.barTintColor = UIColor.black
+            navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+            navigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "gold") ?? .white]
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: item, tag: tag)
+            return navigationController
+        }
 }
-
-

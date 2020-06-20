@@ -9,13 +9,19 @@
 import Foundation
 import RxSwift
 
+// MARK: Protocol
+
 protocol TrailerUseCaseProtocol {
     func getTrailer(movieID: Int) -> Single<Trailer?>
 }
 
+// MARK: Class
+
 class TrailerUseCase: TrailerUseCaseProtocol {
     
     private let remoteDataSource: TrailerRemoteDataSourceProtocol
+    
+    // MARK: - Initialization
     
     init(remoteDataSource: TrailerRemoteDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource

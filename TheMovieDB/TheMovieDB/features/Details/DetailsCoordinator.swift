@@ -13,20 +13,26 @@ import SafariServices
 
 class DetailsCoordinator: Coordinator {
     
+    // MARK: - Public Properties
+    
     weak var navigationController: UINavigationController?
     let movie: Movie
+    
+    // MARK: - Initialization
     
     init(navigationController: UINavigationController, movie: Movie) {
         self.navigationController = navigationController
         self.movie = movie
     }
     
-     func start() {
+    //MARK: - Public methods
+    
+    func start() {
         guard let detailViewController = DetailsBuilder.buildViewController(movie: movie) else { return }
         detailViewController.coordinator = self
         navigationController?.modalPresentationStyle = .automatic
         navigationController?.present(detailViewController, animated: true, completion: nil)
-     }
+    }
     
     func openSafari(controller: UIViewController, urlString: String) {
         if let url = URL(string: urlString) {

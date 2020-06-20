@@ -8,24 +8,33 @@
 
 import UIKit
 
+// MARK: - Protocol
+
 protocol FavoriteFlow: class {
     func coordinateToDetail(movie: Movie)
 }
 
+// MARK: - Class
+
 class FavoritesCoordinator: Coordinator, FavoriteFlow {
     
+    // MARK: - Public Properties
+    
     weak var navigationController: UINavigationController?
+    
+    // MARK: - Initialization
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-     func start() {
-         guard let favoritesController = FavoritesBuilder.buildViewController() else { return }
-        
-         favoritesController.coordinator = self
-         navigationController?.pushViewController(favoritesController, animated: false)
-     }
+    //MARK: - Public methods
+    
+    func start() {
+        guard let favoritesController = FavoritesBuilder.buildViewController() else { return }
+        favoritesController.coordinator = self
+        navigationController?.pushViewController(favoritesController, animated: false)
+    }
     
     func coordinateToDetail(movie: Movie) {
         guard let navigationController = navigationController else { return }

@@ -10,11 +10,11 @@ import UIKit
 
 struct MainBuilder {
     
+    // MARK: Public methods
+    
     static func buildViewController() -> MainViewController? {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Main, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as? MainViewController
         return controller
     }
 }
-
-

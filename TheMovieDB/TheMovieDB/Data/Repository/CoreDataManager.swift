@@ -9,20 +9,29 @@
 import Foundation
 import CoreData
 
+// MARK: - Class
+
 class CoreDataManager {
     
-    let persistentContainer:NSPersistentContainer
+    // MARK: - Private properties
+    
+    private let persistentContainer:NSPersistentContainer
+    private let backgroundContext: NSManagedObjectContext!
+    
+    // MARK: - Public properties
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
-    let backgroundContext: NSManagedObjectContext!
+    // MARK: - Initialization
     
     init(modelName: String) {
         persistentContainer = NSPersistentContainer(name: modelName)
         backgroundContext = persistentContainer.newBackgroundContext()
     }
+    
+    // MARK: - Public methods
     
     func configureContexts() {
         viewContext.automaticallyMergesChangesFromParent = true

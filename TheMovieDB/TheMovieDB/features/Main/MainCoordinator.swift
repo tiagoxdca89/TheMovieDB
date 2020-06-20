@@ -8,17 +8,27 @@
 
 import UIKit
 
+// MARK: - Protocol
+
 protocol MainFlow: class {
     func coordinateToTabBar()
 }
 
+// MARK: - Class
+
 class MainCoordinator: Coordinator, MainFlow {
 
+    // MARK: - Public Properties
+    
     let navigationController: UINavigationController
 
+    // MARK: - Initialization
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
+    //MARK: - Public methods
 
     func start() {
         guard let mainController = MainBuilder.buildViewController() else { return }

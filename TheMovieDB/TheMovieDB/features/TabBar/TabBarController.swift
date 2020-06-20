@@ -16,6 +16,7 @@ class TabBarController: UITabBarController {
     
     var coordinator: TabBarCoordinator?
     
+    // MARK: - Overriden methods
     
     override func viewDidLoad() {
         super.viewDidLoad()

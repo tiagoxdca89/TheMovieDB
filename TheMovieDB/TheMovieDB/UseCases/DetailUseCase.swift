@@ -9,13 +9,19 @@
 import Foundation
 import RxSwift
 
+// MARK: Protocol
+
 protocol DetailUseCaseProtocol {
     func getDetailMovie(movie: Movie) -> Single<Movie>
 }
 
+// MARK: Class
+
 class DetailUseCase: DetailUseCaseProtocol {
     
     private let dataSource: MovieRemoteDataSourceProtocol
+    
+    // MARK: - Initialization
     
     init(dataSource: MovieRemoteDataSourceProtocol) {
         self.dataSource = dataSource

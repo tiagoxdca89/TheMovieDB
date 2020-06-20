@@ -22,6 +22,8 @@ struct DetailsBuilder {
         return controller
     }
     
+    // MARK: Private methods
+    
     private static func buildViewModel(movie: Movie) -> DetailsViewModelProtocol {
         let useCase = buildDetailUseCase()
         let favoritesUseCase = buildFavoritesUseCase()
@@ -52,5 +54,4 @@ struct DetailsBuilder {
     private static var appDelegate: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-    
 }

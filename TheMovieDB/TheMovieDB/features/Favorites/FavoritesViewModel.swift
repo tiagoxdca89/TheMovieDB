@@ -11,23 +11,35 @@ import RxSwift
 import RxCocoa
 import CoreData
 
+// MARK: Protocol
+
 protocol FavoritesViewModelProtocol: BaseViewModelProtocol {
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> { get }
     func deleteMovie(at indexpath: IndexPath)
     func convertMovie(favorite: FavoriteMovie?) -> Movie
 }
 
+// MARK: - Class
+
 class FavoritesViewModel: BaseViewModel {
+    
+    // MARK: - Private properties
+    
+    private let favoritesUseCase: FavoritesUseCaseProtocol
+    
+    // MARK: - Public properties
     
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> {
         return favoritesUseCase.fetchedResultsController
     }
     
-    let favoritesUseCase: FavoritesUseCaseProtocol
+    // MARK: - Initialization
     
     init(favoritesUseCase: FavoritesUseCaseProtocol) {
         self.favoritesUseCase = favoritesUseCase
     }
+    
+    // MARK: - Public methods
     
     func deleteMovie(at indexpath: IndexPath) {
         favoritesUseCase.deleteMovieAt(indexPath: indexpath)
@@ -42,6 +54,8 @@ class FavoritesViewModel: BaseViewModel {
 }
 
 extension FavoritesViewModel: FavoritesViewModelProtocol {
+    
+    // MARK: - Helper methods
     
     func convertMovie(favorite: FavoriteMovie?) -> Movie {
         guard let favorite = favorite else { return Movie() }
