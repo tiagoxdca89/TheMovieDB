@@ -18,5 +18,12 @@ The MovieDB is an application where users can see the Last Releases, Top Rated a
 ## Clone
 * Clone this repo to your local machine using https://github.com/tiagoxdca89/TheMovieDB.git
 
+## Build
+* After clone the repo
+* Open an terminal
+* Navigate the project folder
+* Run pod install(if you don't have cocoapods installed follow this link) [cocoapods](https://guides.cocoapods.org/using/getting-started.html)
+* After that open the file TheMovieDB.xcworkspace
+
 ## License
 TheMovieDB is released under the MIT license. [See LICENSE for details](http://www.github.com/tiagoxdca89/TheMovieDB/blob/master/LICENSE)
