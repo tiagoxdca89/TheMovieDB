@@ -65,7 +65,7 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
             favorite.popularity = movie.popularity ?? 0.0
             favorite.vote_average = movie.vote_average ?? 0.0
             favorite.release_date = movie.release_date
-            favorite.genres = NSSet(array: movie.genres ?? [])
+            favorite.genres = self.getGenders(models: movie.genres ?? [])
             favorite.poster_path = movie.poster_path
             favorite.backdrop_path = movie.backdrop_path
             favorite.poster = UIImage(data: movie.poster ?? Data())
@@ -97,5 +97,15 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
         guard let movies = try? coreDataManager.viewContext.fetch(fetchRequest) else { return Single.just([]) }
         
         return Single.just(movies)
+    }
+    
+    private func getGenders(models: [GenreModel]) -> NSSet {
+        var genres: [Genre] = []
+        for model in models {
+            let genre = Genre(context: self.coreDataManager.viewContext)
+            genre.name = model.name
+            genres.append(genre)
+        }
+        return NSSet(array: genres)
     }
 }

@@ -25,7 +25,6 @@ class MessageManager {
             presentError(title: "Error", subtitle: "The movie is already in your favorite list.", seconds: 2)
             return
         }
-        
         presentError(title: "ERROR", subtitle: "Something went wrong !", seconds: 5)
     }
     
@@ -51,7 +50,7 @@ class MessageManager {
         var config = SwiftMessages.Config()
         config.presentationContext = .window(windowLevel: .statusBar)
         config.duration = .seconds(seconds: seconds)
-        config.interactiveHide = false
+        config.dimMode = .gray(interactive: true)
         return config
     }
 }

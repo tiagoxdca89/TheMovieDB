@@ -23,7 +23,6 @@ class SearchViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "TOP RATED"
         setupEmptyImage()
         setupTableView()

@@ -53,7 +53,7 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
         guard let genders = genders else { return [] }
         var _genders: [GenreModel] = []
         for genre in genders {
-            let genreModel = GenreModel(id: Int(genre.id), name: genre.name)
+            let genreModel = GenreModel(name: genre.name)
             _genders.append(genreModel)
         }
         return _genders

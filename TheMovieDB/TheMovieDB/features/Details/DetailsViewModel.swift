@@ -87,6 +87,7 @@ class DetailsViewModel: BaseViewModel {
         }
         detailUseCase.getDetailMovie(movie: movie)
             .subscribe(onSuccess: { [weak self] (movie) in
+                self?.movie.genres = movie.genres
                 self?.movie.runtime = movie.runtime
                 self?._movieDetail.onNext(movie)
                 }, onError: { [weak self] (error: Error) in

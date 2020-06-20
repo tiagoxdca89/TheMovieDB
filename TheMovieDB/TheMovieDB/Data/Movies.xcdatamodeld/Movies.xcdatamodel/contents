@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FavoriteMovie" representedClassName="FavoriteMovie" syncable="YES" codeGenerationType="class">
         <attribute name="backdrop" optional="YES" attributeType="Transformable" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="backdrop_path" optional="YES" attributeType="String"/>
@@ -18,12 +18,11 @@
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="movie" inverseEntity="Genre"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="movie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FavoriteMovie" inverseName="genres" inverseEntity="FavoriteMovie"/>
     </entity>
     <elements>
         <element name="FavoriteMovie" positionX="-63" positionY="-18" width="128" height="268"/>
-        <element name="Genre" positionX="-63" positionY="90" width="128" height="88"/>
+        <element name="Genre" positionX="-63" positionY="90" width="128" height="73"/>
     </elements>
 </model>
