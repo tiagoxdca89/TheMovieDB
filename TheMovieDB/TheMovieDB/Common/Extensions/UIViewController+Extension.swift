@@ -12,9 +12,9 @@ import MBProgressHUD
 extension UIViewController {
     func showLoading(show: Bool) {
         if show {
-            MBProgressHUD.showAdded(to: view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
         } else {
-            MBProgressHUD.hide(for: view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     

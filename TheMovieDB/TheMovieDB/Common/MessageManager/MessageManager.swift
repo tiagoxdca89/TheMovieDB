@@ -25,6 +25,12 @@ class MessageManager {
             presentError(title: "Error", subtitle: "The movie is already in your favorite list.", seconds: 2)
             return
         }
+        
+        if let searchError = error as? SearchResults, searchError == .noResults {
+            presentError(title: "Sorry", subtitle: "No Results Found.", seconds: 2)
+            return
+        }
+        
         presentError(title: "ERROR", subtitle: "Something went wrong !", seconds: 5)
     }
     
