@@ -47,12 +47,21 @@ class SearchViewController: UITableViewController {
     private func setupBinding() {
         guard let viewModel = viewModel else { return }
         
-        viewModel.emptyList.asObservable()
-        .subscribe(onNext: { [weak self] (empty) in
-            self?.imageEmpty?.isHidden = !empty
-            self?.showLoading(show: false)
-        })
-        .disposed(by: bag)
+        viewModel.emptyList
+            .asObservable()
+            .subscribe(onNext: { [weak self] (empty) in
+                self?.imageEmpty?.isHidden = !empty
+                self?.showLoading(show: false)
+            })
+            .disposed(by: bag)
+        
+        viewModel.showLoading
+            .asObservable()
+            .subscribe(onNext: { [weak self] show in
+                guard let self = self else { return }
+                DispatchQueue.main.async { self.showLoading(show: show) }
+            })
+            .disposed(by: bag)
         
         viewModel
         .dataSource
@@ -110,6 +119,7 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
         guard let text = searchBar.text else { return }
         viewModel?.searchBy(title: text)
         searchController.isActive = false
+        showLoading(show: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

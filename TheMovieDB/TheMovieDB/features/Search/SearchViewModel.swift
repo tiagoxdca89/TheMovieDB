@@ -10,10 +10,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum SearchResults: Error {
+    case noResults
+}
+
 // MARK: Protocol
 
 protocol SearchViewModelProtocol: BaseViewModelProtocol {
     var emptyList: Driver<Bool> { get }
+    var showLoading: Driver<Bool> { get }
     var dataSource: Driver <[Movie]> { get }
     var selectedMovie: Driver<Movie> { get }
     var selectedIndexPath: PublishSubject<IndexPath> { get set }
@@ -37,6 +42,10 @@ class SearchViewModel: BaseViewModel {
         return _emptyList.asDriver(onErrorJustReturn: false)
     }
     
+    var showLoading: Driver<Bool> {
+        return _showLoaging.asDriver(onErrorJustReturn: false)
+    }
+    
     var dataSource: Driver<[Movie]> {
         return _dataSource.asDriver(onErrorJustReturn: [])
     }
@@ -53,6 +62,7 @@ class SearchViewModel: BaseViewModel {
     private var _dataSource = BehaviorSubject<[Movie]>(value: [])
     private var _selectedMovie = PublishSubject<Movie>()
     private var _emptyList = PublishSubject<Bool>()
+    private var _showLoaging = PublishSubject<Bool>()
     private var movies: [Movie] = []
     private var isLoaging = false
     private var page: Int = 0
@@ -127,9 +137,16 @@ class SearchViewModel: BaseViewModel {
         searchUseCase.getMovies(title)
             .asObservable()
             .subscribe(onNext: { [weak self] movies in
-                self?._dataSource.onNext(movies)
+                guard let self = self else { return }
+                if movies.count == 0 {
+                    self._dataSource.onNext(self.movies)
+                    self.presentError(error: SearchResults.noResults)
+                } else {
+                    self._dataSource.onNext(movies)
+                }
             }, onError: { [weak self] (error: Error) in
                 self?.presentError(error: error)
+                self?._showLoaging.onNext(false)
             })
             .disposed(by: bag)
     }
