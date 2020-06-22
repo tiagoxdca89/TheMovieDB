@@ -123,6 +123,7 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel?.moviesCount = 0
         viewModel?.getTopRated()
     }
     
