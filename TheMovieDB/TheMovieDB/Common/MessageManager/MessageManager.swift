@@ -31,6 +31,11 @@ class MessageManager {
             return
         }
         
+        if let trailerError = error as? TrailerError, trailerError == .notAvailable {
+            presentError(title: "Sorry", subtitle: "This movie doesn't have trailer.", seconds: 2)
+            return
+        }
+        
         presentError(title: "ERROR", subtitle: "Something went wrong !", seconds: 5)
     }
     

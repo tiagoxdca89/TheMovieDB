@@ -65,7 +65,10 @@ class DetailsViewController: UIViewController {
             })
             .disposed(by: bag)
         
-        btnPlay.rx.tap.asObservable()
+        btnPlay
+            .rx
+            .tap
+            .asObservable()
             .subscribe(onNext: { _ in
                 viewModel.getTrailer()
             })

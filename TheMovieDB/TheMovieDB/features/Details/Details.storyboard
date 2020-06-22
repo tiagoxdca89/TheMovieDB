@@ -80,7 +80,7 @@
                                                                     <constraint firstAttribute="trailing" secondItem="V2x-km-vHM" secondAttribute="trailing" id="v9t-3q-Gdv"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Hd-0F8">
+                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Hd-0F8">
                                                                 <rect key="frame" x="0.0" y="81.5" width="414" height="40.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSz-n8-E8K">

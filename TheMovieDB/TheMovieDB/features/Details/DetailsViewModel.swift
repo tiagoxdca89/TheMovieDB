@@ -10,7 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-// MARK: Protocol
+// MARK: - Enum
+
+enum TrailerError: Error {
+    case notAvailable
+}
+
+// MARK: - Protocol
 
 protocol DetailsViewModelProtocol: BaseViewModelProtocol {
     var trailerURLString: Driver<String> { get }
@@ -80,7 +86,10 @@ class DetailsViewModel: BaseViewModel {
         guard let id = movie.id else { return }
         trailerUseCase.getTrailer(movieID: id).asObservable()
             .subscribe(onNext: { [weak self] trailer in
-                guard let key = trailer?.key else { return }
+                guard let key = trailer?.key else {
+                    self?.presentError(error: TrailerError.notAvailable)
+                    return
+                }
                 let stringURL = String(format: API.Trailer.youtubePath, key)
                 self?._trailerURLString.onNext(stringURL)
             }, onError: { [weak self] (error: Error) in
