@@ -25,7 +25,7 @@ protocol SearchViewModelProtocol: BaseViewModelProtocol {
     var loadNextPage: PublishSubject<Void> { get set }
     func getTopRated()
     func searchBy(title: String)
-    var moviesCount: Int { get }
+    var moviesCount: Int { get set }
 }
 
 // MARK: - Class
@@ -35,7 +35,12 @@ class SearchViewModel: BaseViewModel {
     // MARK: - Public properties
     
     var moviesCount: Int {
-        return movies.count
+        get { movies.count }
+        set {
+            totalPages = 500
+            page = 0
+            movies = []
+        }
     }
     
     var emptyList: Driver<Bool> {
@@ -142,7 +147,9 @@ class SearchViewModel: BaseViewModel {
                     self._dataSource.onNext(self.movies)
                     self.presentError(error: SearchResults.noResults)
                 } else {
-                    self._dataSource.onNext(movies)
+                    self.movies = movies
+                    self.totalPages = self.movies.count
+                    self._dataSource.onNext(self.movies)
                 }
             }, onError: { [weak self] (error: Error) in
                 self?.presentError(error: error)
